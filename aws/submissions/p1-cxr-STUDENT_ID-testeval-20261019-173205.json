@@ -1,0 +1,58 @@
+{
+  "job_name": "p1-cxr-<학생ID>-testeval-20261019-173205",
+  "experiment_id": "testeval",
+  "retry_of": "p1-cxr-<학생ID>-testeval-20261019-171158",
+  "rerun_reason": "리뷰 지적: test_predictions.csv 확률을 소수 8자리로 반올림해 CSV로 AUROC 재계산 불가 → 전체 정밀도 저장과 CSV 재계산 검사 추가 후 재실행. 모델·규칙·전처리·지표 정의 변경 없음",
+  "submitted_at_kst": "2026-10-19T17:32:24+09:00",
+  "input_channels": {
+    "images": "s3://aws-say3-dataset1/pneumonia-xray/chest_xray/",
+    "manifests": "s3://aws-say3-student-dataset/students/<학생ID>/P1/cxr/manifests/",
+    "models": "s3://aws-say3-student-dataset/students/<학생ID>/P1/cxr/experiments/test_eval_models/"
+  },
+  "output_s3": "s3://aws-say3-student-dataset/students/<학생ID>/P1/cxr/experiments/",
+  "instance_type": "ml.g4dn.xlarge",
+  "framework_version": "2.2",
+  "py_version": "py310",
+  "max_run_seconds": 1800,
+  "hyperparameters": {
+    "primary": "D",
+    "n-boot": 2000,
+    "seed": 42,
+    "batch-size": 64,
+    "num-workers": 4,
+    "plan-sha256": "ba614c0a63711e11e47b7a5d3bfc38679c6b3532cc5b6642d38dc46eec0edd33",
+    "run-label": "aws",
+    "sagemaker_submit_directory": "s3://aws-say3-student-dataset/students/<학생ID>/P1/cxr/code/p1-cxr-<학생ID>-testeval-20261019-173205/source/sourcedir.tar.gz",
+    "sagemaker_program": "evaluate.py",
+    "sagemaker_container_log_level": 20,
+    "sagemaker_job_name": "p1-cxr-<학생ID>-testeval-20261019-173205",
+    "sagemaker_region": "ap-northeast-2"
+  },
+  "aws_config_sha256": {
+    "file": "bdb7f22e8d6057cafccd92f5a92ac8df18cfff21a6a5021f38e930d8e70d99df",
+    "role_arn": "932897d13ef82c6517aa867eb8cf6c68472d8d627d6411795024aa8fbbc4d68b",
+    "training_image_uri": "146f7167e85c8c49d9109c8bc2d541e1eaf41ce0b0392de1f8688647bef1cff3"
+  },
+  "evaluate_py_sha256": "ef1a32fa12451ad19f4011682534b2e06f778d201d69a77ce2f6f5f8b94c7a06",
+  "train_py_sha256": "7c3997152fade2dbacd117f7022c23018cbc828ae06f47ddc19c509150e82f08",
+  "evaluation_plan_sha256": "ba614c0a63711e11e47b7a5d3bfc38679c6b3532cc5b6642d38dc46eec0edd33",
+  "split_manifest_sha256": "205286f33fe23aacde35de43aa5170a318f64eeae44e05402dae01fc83df0268",
+  "model_sha256": {
+    "A": "7c3a14d1d1c617f14d2fc58560a61fb7bf6363b6eeb187fd7ef220d98c1ef5be",
+    "B": "8beae34fab86b4dd750506e8e4233dedba52852fdd13bccded7fc3495366e68e",
+    "C": "701f2d57b3615db9ef53a6184c47f0dcb22b106863d79fb6122352c5522b83cd",
+    "D": "a8bb8a96275344988935af29aeade0167e49cb77a751cb1a483e737fcce47254",
+    "P1": "3b97439d9021663379d317f5297235ba677381690d5477f49dc72371936bd3c5",
+    "P2": "81f95e2455d26c175ebacad4e645a3c2c37a3a924b5f61e274c7fbe6e300d37a",
+    "P3": "e729b9208b166034710eae61a13944f994f6a285bb9b10ae9e847296eaa22983",
+    "P4": "93088cf8728197aca5f0ad4f8bf7cce75d9fe56025cade9f4d9226f9fdb4108b"
+  },
+  "status": "Completed",
+  "secondary_status": "Completed",
+  "training_time_seconds": 290,
+  "billable_time_seconds": 290,
+  "failure_reason": null,
+  "finished_at_kst": "2026-10-19T17:38:24+09:00",
+  "output_tar_s3": "s3://aws-say3-student-dataset/students/<학생ID>/P1/cxr/experiments/p1-cxr-<학생ID>-testeval-20261019-173205/output/output.tar.gz",
+  "local_output_dir": "reports/test_eval/aws"
+}

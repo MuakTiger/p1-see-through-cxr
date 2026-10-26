@@ -1,0 +1,58 @@
+{
+  "experiment_id": "lv-s44",
+  "preprocess": "P0",
+  "preprocess_desc": "P0 원본(전처리 없음)",
+  "preprocess_params": {},
+  "preprocess_order": "RGB 변환(회색은 3채널 복제) → Resize((512,512)) → ToTensor → Normalize(ImageNet mean/std)",
+  "model": "resnet18",
+  "train_mode": "layer4",
+  "trainable": "layer4 + fc (실험 B: layer4 미세조정)",
+  "trainable_params": 8395267,
+  "optimizer": "Adam (파라미터 그룹 2개: fc=lr, layer4=lr_finetune)",
+  "loss": "CrossEntropyLoss (클래스 가중치 없음)",
+  "class_weight": "none",
+  "class_weight_values": null,
+  "class_weight_counts": null,
+  "class_weight_note": null,
+  "epochs": 30,
+  "batch_size": 16,
+  "lr": 0.001,
+  "lr_finetune": 0.0001,
+  "seed": 44,
+  "num_workers": 8,
+  "augmentation": "장치 설정 필터 equip (p=0.5, 5종 중 하나, 세기 0~강): 상대 선량 2^(-6u) (u=1 → 1/64), 번짐 8u mm, 산란 k = u, 대비 1-0.40u, 밝은 쪽 기울기 1-0.50u, 화소 2u mm, 학습에만 (좌우 반전 금지)",
+  "augment": "equip",
+  "noise_std_max": null,
+  "noise_prob": null,
+  "equip_prob": 0.5,
+  "lung_prep": {
+    "masks_file": "lung_hull_masks.npz",
+    "masks_sha256": "d90667d3e517552bc9984a4f7d4b4fe9c29685c0bb3cc9402a223ae3821abbc7",
+    "dilate_px": 16,
+    "min_area": 0.05,
+    "order": "회색 512 (평가와 같은 to_gray) → (학습만 장치 필터) → 폐 볼록 껍질 밖을 0으로 → RGB → Normalize"
+  },
+  "equip_kinds": [
+    "dose",
+    "motion",
+    "scatter",
+    "kvp",
+    "sensor"
+  ],
+  "equip_max": {
+    "dose": "상대 선량 2^(-6u) (u=1 → 1/64)",
+    "motion": "번짐 8u mm",
+    "scatter": "산란 k = u",
+    "kvp": "대비 1-0.40u, 밝은 쪽 기울기 1-0.50u",
+    "sensor": "화소 2u mm"
+  },
+  "max_train_samples": null,
+  "max_val_samples": null,
+  "path_sources": {
+    "images": "env:SM_CHANNEL_IMAGES",
+    "manifests": "env:SM_CHANNEL_MANIFESTS",
+    "weights": "env:SM_CHANNEL_WEIGHTS",
+    "model_dir": "env:SM_MODEL_DIR",
+    "output_dir": "env:SM_OUTPUT_DATA_DIR"
+  }
+}

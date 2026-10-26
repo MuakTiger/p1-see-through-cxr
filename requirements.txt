@@ -1,0 +1,17 @@
+# 학습·평가·분석 (iMac, Python 3.11) — 실제로 쓴 버전
+torch==2.6.0
+torchvision==0.21.0
+numpy==1.26.4
+scipy==1.17.1
+scikit-learn==1.7.2
+pandas==3.0.6
+pillow==11.3.0
+matplotlib==3.8.4
+opencv-python-headless==4.9.0.80
+pyarrow==20.0.0          # numpy 1.26 과 맞는 버전. 올리면 sklearn·streamlit 이 깨질 수 있다
+boto3==1.43.114
+sagemaker==2.257.7       # SDK 2 계열
+streamlit==1.66.0        # app/streamlit_app.py (224 모델 D 시연 화면)
+# 폐 마스크 만들기(src/scratch_1022/xrv_mask_split.py)는 별도 가상환경에서 torchxrayvision 1.5.7 (numpy 2.x)로 실행했다.
+# 배포 화면(deploy/web_v2)의 패키지는 deploy/web_v2/requirements.txt 를 본다.
+# 보고서 PDF 만들기(tools/final_report)는 Google Chrome(headless)이 필요하고, 쪽 번호·책갈피(pdf_post.py)는 pymupdf 가 필요하다.

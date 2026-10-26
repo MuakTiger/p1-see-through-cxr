@@ -1,0 +1,624 @@
+{
+  "note": "최종 test 평가 통합 요약. 주 결과는 AWS(SageMaker) 실행, iMac 실행은 재현 확인용.",
+  "evaluation_plan_sha256": "ba614c0a63711e11e47b7a5d3bfc38679c6b3532cc5b6642d38dc46eec0edd33",
+  "evaluation_plan_sha256_now": "ba614c0a63711e11e47b7a5d3bfc38679c6b3532cc5b6642d38dc46eec0edd33",
+  "split_manifest_sha256": "205286f33fe23aacde35de43aa5170a318f64eeae44e05402dae01fc83df0268",
+  "sagemaker_job": {
+    "name": "p1-cxr-<학생ID>-testeval-20261019-173205",
+    "status": "Completed",
+    "instance_type": "ml.g4dn.xlarge",
+    "training_time_seconds": 290,
+    "billable_time_seconds": 290,
+    "evaluate_py_sha256": "ef1a32fa12451ad19f4011682534b2e06f778d201d69a77ce2f6f5f8b94c7a06",
+    "retry": true,
+    "retry_of": {
+      "name": "p1-cxr-<학생ID>-testeval-20261019-171158",
+      "status": "Completed",
+      "billable_time_seconds": 290,
+      "evaluate_py_sha256": "d29391685bf87cf980363c996a1da55adaf4c44db32bda83a6d6de47595614b5"
+    },
+    "rerun_reason": "리뷰 지적: test_predictions.csv 확률을 소수 8자리로 반올림해 CSV로 AUROC 재계산 불가 → 전체 정밀도 저장과 CSV 재계산 검사 추가 후 재실행. 모델·규칙·전처리·지표 정의 변경 없음"
+  },
+  "rerun_check_vs_first_run": {
+    "first_run_dir": "reports/test_eval/superseded_run1/aws",
+    "metrics_csv_identical": true,
+    "pred_labels_identical_624": true
+  },
+  "code_history_note": "첫 실행(AWS 제출 전): iMac 에서 evaluate.py 를 한 번 실행했고, 그 뒤 보조 분석 5-2 에 '폐렴 사진만의 정답 비율' 열(계획 밖, 결과를 본 뒤 추가)과 클래스가 없는 묶음의 구간 NaN 처리를 추가해 AWS 작업 1을 실행했다. 재실행(리뷰 지적): test_predictions.csv 확률을 소수 8자리에서 전체 정밀도(.17g)로 바꾸고, 저장 후 CSV 로 지표를 재계산해 확인하는 검사와, __getitem__ 이 실제로 돌려준 행으로 연 영상을 세는 기록을 추가했다. 이번에는 AWS 를 먼저 실행하고 iMac 은 그 뒤 재현용으로 실행했다. 모델·규칙·전처리·지표 정의는 바꾸지 않았다.",
+  "model_provenance": {
+    "B,C,D,P1,P2,P3,P4": "runs/results/<실험>/model/best_model.pt 와 바이트 단위 동일 (리뷰에서 확인)",
+    "A": "s3://aws-say3-student-dataset/students/<학생ID>/P1/cxr/experiments/p1-cxr-<학생ID>-a-20261019-101748/output/model.tar.gz 안의 best_model.pt·metadata.json 과 동일 (2026-10-19 재실행 전 내려받아 sha256 7c3a14d1… 일치, metadata 바이트 동일 확인; 로컬 runs/results/a-…/ 에는 model/ 이 없음)"
+  },
+  "confidence_analysis_primary_618": {
+    "normal_to_pneumonia": {
+      "n": 129,
+      "p_normal_quantiles": {
+        "q10": 1.4525293814959818e-11,
+        "q25": 3.281258642573448e-08,
+        "q50": 4.3656484194798395e-05,
+        "q75": 0.012975465506315231,
+        "q90": 0.1711366802453995
+      },
+      "n_p_normal_lt_0.01": 96,
+      "n_p_normal_lt_0.1": 111,
+      "pred_prob_median": 0.9821376800537109,
+      "n_pred_prob_ge_0.70": 113,
+      "n_pred_prob_ge_0.90": 92
+    },
+    "all_errors_618": {
+      "n": 175,
+      "n_pred_prob_ge_0.70": 152,
+      "pred_prob_median": 0.9829675555229187
+    },
+    "correct_618": {
+      "n": 443,
+      "pred_prob_median": 0.9998359680175781
+    },
+    "auroc_rounding_sensitivity": {
+      "note": "확률을 소수 8자리로 반올림하면 생기는 동점 때문에 AUROC 가 바뀌는 정도 (첫 실행 CSV 의 문제)",
+      "auroc_full_precision": [
+        0.9374140071814491,
+        0.9674878747795415,
+        0.818644655314355
+      ],
+      "auroc_rounded_8": [
+        0.9185375348166046,
+        0.9674878747795415,
+        0.8186302121697936
+      ],
+      "macro_full": 0.9078488457584486,
+      "macro_rounded_8": 0.9015518739219798,
+      "n_p_normal_lt_5e-9": 363,
+      "n_true_normal_with_p_normal_lt_5e-9": 28
+    }
+  },
+  "aws_run": {
+    "device": "cuda (Tesla T4)",
+    "versions": {
+      "torch": "2.2.0",
+      "torchvision": "0.17.0",
+      "python": "3.10.13",
+      "numpy": "1.26.4"
+    },
+    "started_at_kst": "2026-10-19T17:36:42+09:00",
+    "finished_at_kst": "2026-10-19T17:37:39+09:00",
+    "elapsed_seconds": 56.8
+  },
+  "local_run": {
+    "device": "cpu (arm)",
+    "versions": {
+      "torch": "2.6.0",
+      "torchvision": "0.21.0",
+      "python": "3.11.16",
+      "numpy": "1.26.4"
+    },
+    "started_at_kst": "2026-10-19T17:38:50+09:00",
+    "finished_at_kst": "2026-10-19T17:40:46+09:00",
+    "elapsed_seconds": 116.3
+  },
+  "checks": {
+    "plan_sha256_matches": true,
+    "split_manifest_sha256_matches": true,
+    "primary_model_sha256_matches": true,
+    "excluded_matches_plan": true,
+    "excluded": [
+      "test/NORMAL/NORMAL2-IM-0096-0001.jpeg",
+      "test/NORMAL/NORMAL2-IM-0173-0001-0002.jpeg",
+      "test/NORMAL/NORMAL2-IM-0246-0001-0002.jpeg",
+      "test/PNEUMONIA/person128_bacteria_607.jpeg",
+      "test/PNEUMONIA/person134_bacteria_644.jpeg",
+      "test/PNEUMONIA/person1661_virus_2873.jpeg"
+    ],
+    "duplicate_pairs": [
+      {
+        "kept": "test/NORMAL/NORMAL2-IM-0095-0001.jpeg",
+        "excluded": [
+          "test/NORMAL/NORMAL2-IM-0096-0001.jpeg"
+        ]
+      },
+      {
+        "kept": "test/NORMAL/NORMAL2-IM-0173-0001-0001.jpeg",
+        "excluded": [
+          "test/NORMAL/NORMAL2-IM-0173-0001-0002.jpeg"
+        ]
+      },
+      {
+        "kept": "test/NORMAL/NORMAL2-IM-0246-0001-0001.jpeg",
+        "excluded": [
+          "test/NORMAL/NORMAL2-IM-0246-0001-0002.jpeg"
+        ]
+      },
+      {
+        "kept": "test/PNEUMONIA/person128_bacteria_606.jpeg",
+        "excluded": [
+          "test/PNEUMONIA/person128_bacteria_607.jpeg"
+        ]
+      },
+      {
+        "kept": "test/PNEUMONIA/person134_bacteria_643.jpeg",
+        "excluded": [
+          "test/PNEUMONIA/person134_bacteria_644.jpeg"
+        ]
+      },
+      {
+        "kept": "test/PNEUMONIA/person1661_virus_2872.jpeg",
+        "excluded": [
+          "test/PNEUMONIA/person1661_virus_2873.jpeg"
+        ]
+      }
+    ],
+    "counts_match_plan": true,
+    "opened_images_all_test": true,
+    "opened_images_basis": "read_manifest 필터(split==test, test/ 경로) + TestDataset 행 검사 + __getitem__ 열기 직전 검사. 개수는 __getitem__ 이 실제로 돌려준 행 번호로 셈",
+    "opened_image_count": 3120,
+    "unique_opened_images": 624,
+    "test_predictions_csv_recompute": {
+      "sklearn_auroc_from_csv_618": [
+        0.9374140071814491,
+        0.9674878747795415,
+        0.818644655314355
+      ],
+      "n_rows_618": 618,
+      "sklearn_auroc_from_csv_624": [
+        0.9379903572211264,
+        0.9676290511012072,
+        0.8177875880081762
+      ],
+      "n_rows_624": 624,
+      "max_abs_diff": 0.0,
+      "sklearn_auroc": "일치",
+      "probability_format": ".17g (전체 정밀도)"
+    }
+  },
+  "image_counts": {
+    "618": {
+      "n_images": 618,
+      "by_class": [
+        231,
+        240,
+        147
+      ],
+      "patients_by_class": [
+        224,
+        77,
+        126
+      ],
+      "patients_total": 426
+    },
+    "624": {
+      "n_images": 624,
+      "by_class": [
+        234,
+        242,
+        148
+      ],
+      "patients_by_class": [
+        225,
+        77,
+        126
+      ],
+      "patients_total": 427
+    }
+  },
+  "model_sha256": {
+    "A": "7c3a14d1d1c617f14d2fc58560a61fb7bf6363b6eeb187fd7ef220d98c1ef5be",
+    "B": "8beae34fab86b4dd750506e8e4233dedba52852fdd13bccded7fc3495366e68e",
+    "C": "701f2d57b3615db9ef53a6184c47f0dcb22b106863d79fb6122352c5522b83cd",
+    "D": "a8bb8a96275344988935af29aeade0167e49cb77a751cb1a483e737fcce47254",
+    "P1": "3b97439d9021663379d317f5297235ba677381690d5477f49dc72371936bd3c5",
+    "P2": "81f95e2455d26c175ebacad4e645a3c2c37a3a924b5f61e274c7fbe6e300d37a",
+    "P3": "e729b9208b166034710eae61a13944f994f6a285bb9b10ae9e847296eaa22983",
+    "P4": "93088cf8728197aca5f0ad4f8bf7cce75d9fe56025cade9f4d9226f9fdb4108b"
+  },
+  "primary_model": "D",
+  "primary_618": {
+    "macro_f1": 0.6924332496794432,
+    "macro_auroc": 0.9078488457584486,
+    "accuracy": 0.7168284789644013,
+    "precision": [
+      1.0,
+      0.7896551724137931,
+      0.49557522123893805
+    ],
+    "recall": [
+      0.44155844155844154,
+      0.9541666666666667,
+      0.7619047619047619
+    ],
+    "f1": [
+      0.6126126126126126,
+      0.8641509433962264,
+      0.6005361930294906
+    ],
+    "auroc": [
+      0.9374140071814491,
+      0.9674878747795415,
+      0.818644655314355
+    ],
+    "confusion": [
+      [
+        102,
+        26,
+        103
+      ],
+      [
+        0,
+        229,
+        11
+      ],
+      [
+        0,
+        35,
+        112
+      ]
+    ],
+    "n_images": [
+      231,
+      240,
+      147
+    ],
+    "n_patients": [
+      224,
+      77,
+      126
+    ],
+    "ci": {
+      "macro_f1": [
+        0.6524109678601937,
+        0.7324519913641766
+      ],
+      "macro_auroc": [
+        0.886606103282636,
+        0.9259356658130369
+      ],
+      "recall_normal": [
+        0.37673152198940824,
+        0.5093502447708055
+      ],
+      "recall_bacterial": [
+        0.9275296442687747,
+        0.9769239631336405
+      ],
+      "recall_viral": [
+        0.6754767414026969,
+        0.8504025149841344
+      ]
+    },
+    "zero_division_classes": []
+  },
+  "primary_624": {
+    "macro_f1": 0.6900545850110786,
+    "macro_auroc": 0.9078023321101699,
+    "accuracy": 0.7147435897435898,
+    "recall": [
+      0.4358974358974359,
+      0.9545454545454546,
+      0.7635135135135135
+    ],
+    "ci": {
+      "macro_f1": [
+        0.6475149850168536,
+        0.7296867193565877
+      ],
+      "macro_auroc": [
+        0.8860104034302239,
+        0.927449854297144
+      ],
+      "recall_normal": [
+        0.37227272727272726,
+        0.5043478260869565
+      ],
+      "recall_bacterial": [
+        0.9267241379310345,
+        0.978021978021978
+      ],
+      "recall_viral": [
+        0.6733333333333333,
+        0.8513638638638638
+      ]
+    }
+  },
+  "val_vs_test": {
+    "A": {
+      "val_macro_f1": 0.805772,
+      "val_epoch": 10,
+      "val_recall": [
+        0.954887,
+        0.893443,
+        0.550725
+      ],
+      "test_macro_f1": 0.748275,
+      "test_recall": [
+        0.61039,
+        0.945833,
+        0.707483
+      ],
+      "val_rank": 8,
+      "test_rank": 2
+    },
+    "B": {
+      "val_macro_f1": 0.818431,
+      "val_epoch": 21,
+      "val_recall": [
+        0.973684,
+        0.852459,
+        0.615942
+      ],
+      "test_macro_f1": 0.718692,
+      "test_recall": [
+        0.497835,
+        0.970833,
+        0.741497
+      ],
+      "val_rank": 6,
+      "test_rank": 4
+    },
+    "C": {
+      "val_macro_f1": 0.821287,
+      "val_epoch": 30,
+      "val_recall": [
+        0.966165,
+        0.840164,
+        0.648551
+      ],
+      "test_macro_f1": 0.690002,
+      "test_recall": [
+        0.480519,
+        0.9625,
+        0.680272
+      ],
+      "val_rank": 5,
+      "test_rank": 7
+    },
+    "D": {
+      "val_macro_f1": 0.834021,
+      "val_epoch": 26,
+      "val_recall": [
+        0.981203,
+        0.82582,
+        0.695652
+      ],
+      "test_macro_f1": 0.692433,
+      "test_recall": [
+        0.441558,
+        0.954167,
+        0.761905
+      ],
+      "val_rank": 1,
+      "test_rank": 6
+    },
+    "P1": {
+      "val_macro_f1": 0.821559,
+      "val_epoch": 10,
+      "val_recall": [
+        0.973684,
+        0.821721,
+        0.673913
+      ],
+      "test_macro_f1": 0.700277,
+      "test_recall": [
+        0.454545,
+        0.9375,
+        0.789116
+      ],
+      "val_rank": 4,
+      "test_rank": 5
+    },
+    "P2": {
+      "val_macro_f1": 0.83076,
+      "val_epoch": 19,
+      "val_recall": [
+        0.954887,
+        0.797131,
+        0.75
+      ],
+      "test_macro_f1": 0.683816,
+      "test_recall": [
+        0.4329,
+        0.920833,
+        0.782313
+      ],
+      "val_rank": 2,
+      "test_rank": 8
+    },
+    "P3": {
+      "val_macro_f1": 0.817885,
+      "val_epoch": 16,
+      "val_recall": [
+        0.977444,
+        0.780738,
+        0.706522
+      ],
+      "test_macro_f1": 0.732781,
+      "test_recall": [
+        0.5671,
+        0.929167,
+        0.741497
+      ],
+      "val_rank": 7,
+      "test_rank": 3
+    },
+    "P4": {
+      "val_macro_f1": 0.828723,
+      "val_epoch": 26,
+      "val_recall": [
+        0.988722,
+        0.834016,
+        0.666667
+      ],
+      "test_macro_f1": 0.756962,
+      "test_recall": [
+        0.632035,
+        0.941667,
+        0.721088
+      ],
+      "val_rank": 3,
+      "test_rank": 1
+    }
+  },
+  "subgroup_overlap": {
+    "618/same_number_as_original_train": {
+      "n_images": 317,
+      "n_patients": 170,
+      "n_images_by_class": [
+        0,
+        192,
+        125
+      ],
+      "macro_f1": 0.5774569122586745,
+      "macro_f1_ci95": [
+        0.5419310738790126,
+        0.6053895379424528
+      ],
+      "recall": [
+        NaN,
+        0.9583333333333334,
+        0.752
+      ],
+      "pneumonia_only_n": 317,
+      "pneumonia_only_accuracy": 0.8769716088328076,
+      "pneumonia_only_accuracy_ci95": [
+        0.8245448526977822,
+        0.9169200920056889
+      ],
+      "warnings": [
+        "NORMAL: 예측된 적 없음(정밀도 분모 0, F1=0 처리)",
+        "NORMAL: 이 세트에 없음(recall 계산 불가)",
+        "NORMAL: 이 세트에 없어서 AUROC 계산 불가(NaN, Macro 평균에서 제외)"
+      ]
+    },
+    "618/rest": {
+      "n_images": 301,
+      "n_patients": 256,
+      "n_images_by_class": [
+        231,
+        48,
+        22
+      ],
+      "macro_f1": 0.5302984240505122,
+      "macro_f1_ci95": [
+        0.44950682309266365,
+        0.5917796390454849
+      ],
+      "recall": [
+        0.44155844155844154,
+        0.9375,
+        0.8181818181818182
+      ],
+      "pneumonia_only_n": 70,
+      "pneumonia_only_accuracy": 0.9,
+      "pneumonia_only_accuracy_ci95": [
+        0.8,
+        0.9710144927536232
+      ],
+      "warnings": []
+    },
+    "624/same_number_as_original_train": {
+      "n_images": 320,
+      "n_patients": 170,
+      "n_images_by_class": [
+        0,
+        194,
+        126
+      ],
+      "macro_f1": 0.5782679373984,
+      "macro_f1_ci95": [
+        0.5429246823541023,
+        0.6060695304500305
+      ],
+      "recall": [
+        NaN,
+        0.9587628865979382,
+        0.753968253968254
+      ],
+      "pneumonia_only_n": 320,
+      "pneumonia_only_accuracy": 0.878125,
+      "pneumonia_only_accuracy_ci95": [
+        0.8255804897486054,
+        0.9178988653134762
+      ],
+      "warnings": [
+        "NORMAL: 예측된 적 없음(정밀도 분모 0, F1=0 처리)",
+        "NORMAL: 이 세트에 없음(recall 계산 불가)",
+        "NORMAL: 이 세트에 없어서 AUROC 계산 불가(NaN, Macro 평균에서 제외)"
+      ]
+    },
+    "624/rest": {
+      "n_images": 304,
+      "n_patients": 257,
+      "n_images_by_class": [
+        234,
+        48,
+        22
+      ],
+      "macro_f1": 0.5253975173330011,
+      "macro_f1_ci95": [
+        0.4471424260659896,
+        0.5858090020517971
+      ],
+      "recall": [
+        0.4358974358974359,
+        0.9375,
+        0.8181818181818182
+      ],
+      "pneumonia_only_n": 70,
+      "pneumonia_only_accuracy": 0.9,
+      "pneumonia_only_accuracy_ci95": [
+        0.8,
+        0.9710144927536232
+      ],
+      "warnings": []
+    }
+  },
+  "misclassified_counts_618": {
+    "정상→폐렴": 129,
+    "폐렴→정상": 0,
+    "세균성→바이러스성": 11,
+    "바이러스성→세균성": 35
+  },
+  "reproducibility_aws_vs_local": {
+    "618": {
+      "n": 618,
+      "pred_agree": 618,
+      "pred_agree_rate": 1.0,
+      "max_abs_prob_diff": 2.1398067474365234e-05
+    },
+    "624": {
+      "n": 624,
+      "pred_agree": 624,
+      "pred_agree_rate": 1.0,
+      "max_abs_prob_diff": 2.1398067474365234e-05
+    },
+    "metrics_max_abs_diff": {
+      "value": 2.2000000000077513e-05,
+      "where": "P3/624/macro/macro_auroc_ci_low"
+    },
+    "misclassified_same_images_and_types": true,
+    "misclassified_count": 175,
+    "confusion_identical": true
+  },
+  "sklearn_crosscheck": {
+    "aws": {
+      "available": true,
+      "sklearn_version": "1.5.0",
+      "max_abs_diff": {
+        "macro_f1": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "auroc": 0.0
+      },
+      "all_match_1e-9": true
+    },
+    "local": {
+      "available": true,
+      "sklearn_version": "1.7.2",
+      "max_abs_diff": {
+        "macro_f1": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "auroc": 0.0
+      },
+      "all_match_1e-9": true
+    }
+  }
+}

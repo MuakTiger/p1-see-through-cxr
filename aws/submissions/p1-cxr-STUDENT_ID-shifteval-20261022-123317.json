@@ -1,0 +1,51 @@
+{
+  "job_name": "p1-cxr-<학생ID>-shifteval-20261022-123317",
+  "experiment_id": "shifteval",
+  "submitted_at_kst": "2026-10-22T12:33:20+09:00",
+  "input_channels": {
+    "images": "s3://aws-say3-dataset1/pneumonia-xray/chest_xray/",
+    "manifests": "s3://aws-say3-student-dataset/students/<학생ID>/P1/cxr/manifests/",
+    "models": "s3://aws-say3-student-dataset/students/<학생ID>/P1/cxr/experiments/shift_eval_models/"
+  },
+  "output_s3": "s3://aws-say3-student-dataset/students/<학생ID>/P1/cxr/experiments/",
+  "instance_type": "ml.g4dn.2xlarge",
+  "framework_version": "2.2",
+  "py_version": "py310",
+  "max_run_seconds": 3600,
+  "hyperparameters": {
+    "model-ids": "B512",
+    "n-boot": 1000,
+    "seed": 42,
+    "plot": 0,
+    "expected-hash": "6eadd1728f8946984b0e2a2536c45bed1695e4b8cbf0faba8ef029d38b7eea05",
+    "sagemaker_submit_directory": "s3://aws-say3-student-dataset/students/<학생ID>/P1/cxr/code/p1-cxr-<학생ID>-shifteval-20261022-123317/source/sourcedir.tar.gz",
+    "sagemaker_program": "equipment_eval_direct.py",
+    "sagemaker_container_log_level": 20,
+    "sagemaker_job_name": "p1-cxr-<학생ID>-shifteval-20261022-123317",
+    "sagemaker_region": "ap-northeast-2"
+  },
+  "aws_config_sha256": {
+    "file": "bdb7f22e8d6057cafccd92f5a92ac8df18cfff21a6a5021f38e930d8e70d99df",
+    "role_arn": "932897d13ef82c6517aa867eb8cf6c68472d8d627d6411795024aa8fbbc4d68b",
+    "training_image_uri": "146f7167e85c8c49d9109c8bc2d541e1eaf41ce0b0392de1f8688647bef1cff3"
+  },
+  "code_sha256": {
+    "src/equipment_eval_direct.py": "05d21bf98250bf2d47439a17827a3d02c3bccfebd7540ba82fb615c1aa45cd98",
+    "src/shift_eval.py": "07697becd7638bd4e41aec84fe73532b8b31094da80bd141cebf8cf8cd9dcc9b",
+    "training/equipment_direct.py": "6eadd1728f8946984b0e2a2536c45bed1695e4b8cbf0faba8ef029d38b7eea05",
+    "training/shift_filters.py": "e4d124ff7cffa443eb598bad056a66cb1d470d0137fae8f2ab41d4baf4a98952",
+    "training/train.py": "42b42903dc1a6e3cad0083c9abb25df011c5731ff9e2bbf16f611cbec3d8f5af",
+    "training/preprocess.py": "346cf166ffb4df4d8850f245c7439cf1b03c98b78b383d0cd94c3b078d6f591f"
+  },
+  "model_sha256": {
+    "B512": "9182ff4bee4d3c0e7b11318d6a90f46a1d3605fe270e37e6841bc5f30c51c1a4"
+  },
+  "status": "Completed",
+  "secondary_status": "Completed",
+  "training_time_seconds": 626,
+  "billable_time_seconds": 626,
+  "failure_reason": null,
+  "finished_at_kst": "2026-10-22T12:44:51+09:00",
+  "output_tar_s3": "s3://aws-say3-student-dataset/students/<학생ID>/P1/cxr/experiments/p1-cxr-<학생ID>-shifteval-20261022-123317/output/output.tar.gz",
+  "local_output_dir": "reports/equipment_v2/aws_val"
+}

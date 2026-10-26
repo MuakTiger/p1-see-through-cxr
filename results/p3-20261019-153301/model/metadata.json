@@ -1,0 +1,60 @@
+{
+  "experiment_id": "P3",
+  "class_names": [
+    "NORMAL",
+    "BACTERIAL_PNEUMONIA",
+    "VIRAL_PNEUMONIA"
+  ],
+  "label_mapping": {
+    "0": "NORMAL",
+    "1": "BACTERIAL_PNEUMONIA",
+    "2": "VIRAL_PNEUMONIA"
+  },
+  "input_size": [
+    224,
+    224
+  ],
+  "channels": 3,
+  "resize": "전체 영상을 Resize((224,224)), 자르기 없음, 종횡비 변경됨",
+  "normalize": {
+    "mean": [
+      0.485,
+      0.456,
+      0.406
+    ],
+    "std": [
+      0.229,
+      0.224,
+      0.225
+    ]
+  },
+  "preprocess": "P3",
+  "preprocess_desc": "P3 LPF 가우시안(sigma 1.5)",
+  "preprocess_params": {
+    "method": "cv2.GaussianBlur",
+    "sigma": 1.5,
+    "ksize": [
+      0,
+      0
+    ],
+    "border": "BORDER_REFLECT"
+  },
+  "preprocess_order": "회색조(L) → PIL Resize (224,224) BILINEAR → 전처리(224 해상도에서) → 3채널 복제 → ToTensor → Normalize(ImageNet mean/std)",
+  "model": "resnet18",
+  "pretrained_weights": "torchvision IMAGENET1K_V1",
+  "train_mode": "layer4",
+  "lr_finetune": 0.0001,
+  "trainable_params": 8395267,
+  "augment": "none",
+  "noise_std_max": null,
+  "noise_prob": null,
+  "augment_note": "증강은 학습(train)에만 적용, val 과 추론 전처리는 P0 와 동일",
+  "class_weight": "none",
+  "class_weight_values": null,
+  "class_weight_counts": null,
+  "class_weight_note": null,
+  "num_classes": 3,
+  "selected_epoch": 16,
+  "selection_rule": "val_macro_f1 가 가장 높은 에폭. 동률이면 val_loss 가 낮은 쪽, 그래도 같으면 더 이른 에폭. 조기 종료 없음(최대 에폭까지 실행).",
+  "best_val_macro_f1": 0.8178849568268117
+}

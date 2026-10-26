@@ -1,0 +1,8 @@
+item,value,note
+primary_D_618_pred_agree,618/618,100.0000%
+primary_D_618_max_abs_prob_diff,2.14e-05,test_predictions.csv 는 전체 정밀도(.17g)
+primary_D_624_pred_agree,624/624,100.0000%
+primary_D_624_max_abs_prob_diff,2.14e-05,test_predictions.csv 는 전체 정밀도(.17g)
+metrics_csv_max_abs_diff,2.20e-05,P3/624/macro/macro_auroc_ci_low
+misclassified_same_images_and_types,True,오분류 175장
+confusion_matrix_csv_identical,True,

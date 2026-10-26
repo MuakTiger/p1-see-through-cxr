@@ -1,0 +1,31 @@
+# 폐 모델 test 평가 고정 해시 (2026-10-22 19:05, 폐 모델·새 기준의 test 점수를 보기 전). 모델 해시는 평가 직전에 덧붙인다.
+5a954f7ae81502fbba7fdf0e163892f24c5975859adf572b5cb879e99367a166  reports/equipment_v2/test_plan_lung.md
+1fa2f4e6e5415a213fb60ae826b913245bab063c9d2cadacd37f5c4f273f6311  reports/equipment_v2/lung_plan.md
+97c58b7e038abd0e2a4cf900efae8e2b6413e42f37020c812da932296719f303  reports/equipment_v2/lung_plan_note.md
+8a393d7f3c0d55cc5721aee9bd87d6661116f7a348eb59111619fe43d9df3e13  src/equipment_eval_lung.py
+1db9d4b4e3a3f9c2723b9525ff849a56beba0896357405fd0107c933c4b6e07a  src/equipment_eval_direct.py
+07697becd7638bd4e41aec84fe73532b8b31094da80bd141cebf8cf8cd9dcc9b  src/shift_eval.py
+231e8cb0038b4365d264ed887155cbd59d11d618cc8dd01dd74b37a9b21b9398  training/lung_prep.py
+6eadd1728f8946984b0e2a2536c45bed1695e4b8cbf0faba8ef029d38b7eea05  training/equipment_direct.py
+e4d124ff7cffa443eb598bad056a66cb1d470d0137fae8f2ab41d4baf4a98952  training/shift_filters.py
+42b42903dc1a6e3cad0083c9abb25df011c5731ff9e2bbf16f611cbec3d8f5af  training/train.py
+acb3c7e800dad079fad1af0b9a5ce83fcd345c11b54034956fc4b5e3dc42c65c  training/train_aug.py
+346cf166ffb4df4d8850f245c7439cf1b03c98b78b383d0cd94c3b078d6f591f  training/preprocess.py
+205286f33fe23aacde35de43aa5170a318f64eeae44e05402dae01fc83df0268  manifests/split_manifest.csv
+a5e67de9cc4b2b523732b9e02797a53087a38dbf942299b903826df550486020  runs/lung_masks/train_lung_masks.npz
+7879874e05b0cb6b386541dc24b1ed25ca1dbb054bf642dc58fae5049dc6a48b  runs/lung_masks/val_lung_masks.npz
+# 평가 직전 덧붙임 (2026-10-22 19:20, l-s42 의 test 점수를 보기 전)
+1692ba0693b0b02416020c86cc688fa49af9f1eac5accbaf42d72d63d8db9169  runs/results/l-s42-20261022-190058/model/best_model.pt
+f2c58ee11cb3f28abde6387d3bb1301ff2035ca474076e36be0c81d4dd308f13  runs/results/l-s42-20261022-190058/model/metadata.json
+# 평가 직전 덧붙임 (2026-10-22 19:32, l-s43 의 test 점수를 보기 전)
+e65eed046ef16d45656f917ed082e6c909e8e689f3139e3706e351a1491ac2b0  runs/results/l-s43-20261022-190100/model/best_model.pt
+64edeadfff15f6d3813b0b25ee5b52fc7bd521e6dab4e5655a202607f6852e89  runs/results/l-s43-20261022-190100/model/metadata.json
+# 평가 직전 덧붙임 (2026-10-22 19:52, l-s44 의 test 점수를 보기 전)
+dbf4472a2dbd9d2a8f229ab2d1128117b65e447231758a0e9f86eba56f563b3c  runs/results/l-s44-20261022-190102/model/best_model.pt
+67772281045ea64964fd12edaf170faf84ad4e72f6792cce53bf667c6e1dbb8e  runs/results/l-s44-20261022-190102/model/metadata.json
+# 평가 직전 덧붙임 (2026-10-22 20:03, b512-s43 의 test 점수를 보기 전)
+0b3bfb19c08e27e7f2c79a83bb7ff5e4a566e6b09115cfbb6691324df9469c36  runs/results/b512-s43-20261022-190104/model/best_model.pt
+b29eba7ad96395a7e8a243256ec0d7d2a0e2d5208f6c86ccaaa7547752c8a29e  runs/results/b512-s43-20261022-190104/model/metadata.json
+# 평가 직전 덧붙임 (2026-10-22 20:16, b512-s44 의 test 점수를 보기 전)
+546f794036937feb53a7023e627d92727bba68942d58b801836f872364e31128  runs/results/b512-s44-20261022-190105/model/best_model.pt
+3e9c0b6c73bb1fb7d2e9208b7c223310a314c801c27381ffbd1ea790b2c26975  runs/results/b512-s44-20261022-190105/model/metadata.json

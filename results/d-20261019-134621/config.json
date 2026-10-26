@@ -1,0 +1,29 @@
+{
+  "experiment_id": "D",
+  "preprocess": "P0",
+  "model": "resnet18",
+  "train_mode": "layer4",
+  "trainable": "layer4 + fc (실험 B: layer4 미세조정)",
+  "trainable_params": 8395267,
+  "optimizer": "Adam (파라미터 그룹 2개: fc=lr, layer4=lr_finetune)",
+  "loss": "CrossEntropyLoss (클래스 가중치 없음)",
+  "epochs": 30,
+  "batch_size": 16,
+  "lr": 0.001,
+  "lr_finetune": 0.0001,
+  "seed": 42,
+  "num_workers": 4,
+  "augmentation": "회색 가우시안 노이즈 noise (p=0.5, std 0~10), 학습에만 (좌우 반전 금지)",
+  "augment": "noise",
+  "noise_std_max": 10.0,
+  "noise_prob": 0.5,
+  "max_train_samples": null,
+  "max_val_samples": null,
+  "path_sources": {
+    "images": "env:SM_CHANNEL_IMAGES",
+    "manifests": "env:SM_CHANNEL_MANIFESTS",
+    "weights": "env:SM_CHANNEL_WEIGHTS",
+    "model_dir": "env:SM_MODEL_DIR",
+    "output_dir": "env:SM_OUTPUT_DATA_DIR"
+  }
+}

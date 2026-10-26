@@ -1,0 +1,57 @@
+{
+  "experiment_id": "C",
+  "class_names": [
+    "NORMAL",
+    "BACTERIAL_PNEUMONIA",
+    "VIRAL_PNEUMONIA"
+  ],
+  "label_mapping": {
+    "0": "NORMAL",
+    "1": "BACTERIAL_PNEUMONIA",
+    "2": "VIRAL_PNEUMONIA"
+  },
+  "input_size": [
+    224,
+    224
+  ],
+  "channels": 3,
+  "resize": "전체 영상을 Resize((224,224)), 자르기 없음, 종횡비 변경됨",
+  "normalize": {
+    "mean": [
+      0.485,
+      0.456,
+      0.406
+    ],
+    "std": [
+      0.229,
+      0.224,
+      0.225
+    ]
+  },
+  "preprocess": "P0",
+  "model": "resnet18",
+  "pretrained_weights": "torchvision IMAGENET1K_V1",
+  "train_mode": "layer4",
+  "lr_finetune": 0.0001,
+  "trainable_params": 8395267,
+  "augment": "none",
+  "noise_std_max": null,
+  "noise_prob": null,
+  "augment_note": "증강은 학습(train)에만 적용, val 과 추론 전처리는 P0 와 동일",
+  "class_weight": "inverse",
+  "class_weight_values": [
+    1.297984496124031,
+    0.683317009467842,
+    1.3052697224820704
+  ],
+  "class_weight_counts": [
+    1075,
+    2042,
+    1069
+  ],
+  "class_weight_note": "w_c = N / (K * n_c), 실제로 학습에 쓴 train 영상 수로만 계산 (val 사용 안 함). 학습 손실에만 적용, val_loss 는 가중치 없는 CrossEntropy",
+  "num_classes": 3,
+  "selected_epoch": 30,
+  "selection_rule": "val_macro_f1 가 가장 높은 에폭. 동률이면 val_loss 가 낮은 쪽, 그래도 같으면 더 이른 에폭. 조기 종료 없음(최대 에폭까지 실행).",
+  "best_val_macro_f1": 0.8212873519892212
+}

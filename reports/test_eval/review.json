@@ -1,0 +1,38 @@
+{
+  "verdict": "APPROVED",
+  "findings": [
+    {
+      "id": 1,
+      "blocking": false,
+      "label": "τ 보류 서술이 실제보다 약함",
+      "detail": "test_report.md 3장의 '이 규칙으로는 113장 대부분이 걸러지지 않는다'와 'τ(약 0.70 이하)'. 기획안 규칙상 τ < 0.70이므로 최대 확률 ≥0.70인 정상→폐렴 113장은 모두 보류되지 않고 '높게'로 나간다 (confirmed).",
+      "action": "'113장 모두'로 고치고 τ를 '0.70보다 작은 값'으로 적는다."
+    },
+    {
+      "id": 2,
+      "blocking": false,
+      "label": "misclassified.csv 확률은 아직 6자리",
+      "detail": "오분류 목록의 p_normal 다수가 0.000000 동점이다. 지표 원본은 test_predictions.csv(.17g)라 점수에는 영향이 없다 (confirmed).",
+      "action": "Grad-CAM 단계에서 확신도로 사진을 고를 때는 test_predictions.csv의 전체 정밀도 확률을 쓴다."
+    }
+  ],
+  "verified": {
+    "pass1_blocking_fixed": "AUROC CSV 재현(.17g 저장 + recompute_from_csv 검사), 3장 정상 오분류 해석 수정 모두 해결",
+    "pass1_nonblocking_fixed": "연 영상 기록(__getitem__ 반환 행 번호), 5-2 계획 밖 표시, A 출처(S3 대조), 실행 순서 기록 모두 반영",
+    "plan_sha256": "ba614c0a… 일치",
+    "split_manifest_sha256": "205286f3… 일치",
+    "primary_model": "D, best_model.pt sha256 a8bb8a96… 계획·원본과 일치",
+    "excluded_6": "계획 2장 목록과 일치 (manifest 재계산 + CSV excluded 열)",
+    "counts": "618: 231/240/147, 환자 426 / 624: 234/242/148, 환자 427",
+    "metrics_618_recomputed": "Macro-F1 0.692433, 정확도 0.716828, 혼동행렬 [[102,26,103],[0,229,11],[0,35,112]], 클래스별 P/R/F1 metrics.csv와 일치",
+    "auroc_sklearn_618": "0.937414 / 0.967488 / 0.818645, Macro 0.907849 — metrics.csv와 일치 (624장도 일치)",
+    "bootstrap_unit": "patient_group 단위 복원 추출 (bootstrap_ci, bootstrap_scalar 코드 확인)",
+    "preprocess": "metadata A~D P0, P1~P4 각각 일치; train.py 해시가 P 시리즈 학습 때와 같음, preprocess.py는 P 제출 전 이후 미수정",
+    "test_only_images": "열람 3,120회 = 5묶음 × 624, 고유 경로 624개, 모두 test/ (AWS 로그)",
+    "aws_vs_imac": "618/618, 624/624 예측 일치, 확률 최대 차이 2.14e-5",
+    "rerun_unchanged": "재실행 전후 aws metrics.csv 등 5개 파일 해시 동일, 624장 예측 라벨 동일",
+    "report_numbers": "확신도 분석·AUROC 반올림 민감도·5-3 표·5-2 표가 산출물 및 직접 계산과 일치",
+    "security": "역할 ARN, 계정 번호, 역할 이름, 이미지 주소, ARN 패턴 노출 0건 (51개 파일)"
+  },
+  "reviewDoc": "~/Documents/p1/reports/test_eval/review.md"
+}

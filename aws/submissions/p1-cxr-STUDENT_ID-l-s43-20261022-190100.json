@@ -1,0 +1,40 @@
+{
+  "job_name": "p1-cxr-<학생ID>-l-s43-20261022-190100",
+  "experiment_id": "l-s43",
+  "submitted_at_kst": "2026-10-22T19:01:01+09:00",
+  "input_channels": {
+    "images": "s3://aws-say3-student-dataset/students/<학생ID>/P1/cxr/lung512/images/",
+    "manifests": "s3://aws-say3-student-dataset/students/<학생ID>/P1/cxr/lung512/manifests/",
+    "weights": "s3://aws-say3-student-dataset/students/<학생ID>/P1/cxr/weights/"
+  },
+  "output_s3": "s3://aws-say3-student-dataset/students/<학생ID>/P1/cxr/experiments/",
+  "instance_type": "ml.g4dn.2xlarge",
+  "framework_version": "2.2",
+  "py_version": "py310",
+  "max_run_seconds": 5400,
+  "hyperparameters": {
+    "epochs": 30,
+    "batch-size": 16,
+    "lr": 0.001,
+    "num-workers": 8,
+    "seed": 43,
+    "experiment-id": "l-s43",
+    "train-mode": "layer4",
+    "input-size": "512",
+    "augment": "none",
+    "sagemaker_submit_directory": "s3://aws-say3-student-dataset/students/<학생ID>/P1/cxr/code/p1-cxr-<학생ID>-l-s43-20261022-190100/source/sourcedir.tar.gz",
+    "sagemaker_program": "train_aug.py",
+    "sagemaker_container_log_level": 20,
+    "sagemaker_job_name": "p1-cxr-<학생ID>-l-s43-20261022-190100",
+    "sagemaker_region": "ap-northeast-2"
+  },
+  "aws_config_sha256": {
+    "file": "bdb7f22e8d6057cafccd92f5a92ac8df18cfff21a6a5021f38e930d8e70d99df",
+    "role_arn": "932897d13ef82c6517aa867eb8cf6c68472d8d627d6411795024aa8fbbc4d68b",
+    "training_image_uri": "146f7167e85c8c49d9109c8bc2d541e1eaf41ce0b0392de1f8688647bef1cff3"
+  },
+  "entry_point": "train_aug.py",
+  "train_py_sha256": "acb3c7e800dad079fad1af0b9a5ce83fcd345c11b54034956fc4b5e3dc42c65c",
+  "split_manifest_sha256": "4fe1d4461a50fe627014e35b3dd781f49d2aedc3af953ae0048d3bebb087286c",
+  "status": "Submitted"
+}

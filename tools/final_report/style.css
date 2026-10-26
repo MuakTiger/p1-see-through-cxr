@@ -1,0 +1,109 @@
+/* 결과보고서 스타일 (A4 세로, 인쇄용). 색은 ink·muted·파랑/주황 두 가지만 쓴다. */
+:root {
+  --ink: #0b0b0b;
+  --ink2: #52514e;
+  --muted: #898781;
+  --grid: #e1e0d9;
+  --axis: #c3c2b7;
+  --panel: #f6f5f1;
+  --head: #efeee9;
+  --blue: #2a78d6;
+  --blue-d: #1c5cab;
+  --orange: #eb6834;
+  --good: #006300;
+  --bad: #b02a2a;
+}
+@page {
+  size: A4;
+  margin: 17mm 16mm 19mm 16mm;
+  @bottom-left { content: "P1 See-Through CXR · 결과보고서 · 오형준"; font: 8pt 'Apple SD Gothic Neo', sans-serif; color: #898781; }
+  @bottom-right { content: counter(page) " / " counter(pages); font: 8pt 'Apple SD Gothic Neo', sans-serif; color: #898781; }
+}
+@page :first {
+  @bottom-left { content: none; }
+  @bottom-right { content: none; }
+}
+* { box-sizing: border-box; }
+html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+body {
+  margin: 0;
+  color: var(--ink);
+  font-family: 'Apple SD Gothic Neo', 'Noto Sans KR', 'Nanum Gothic', system-ui, sans-serif;
+  font-size: 9.7pt;
+  line-height: 1.66;
+  word-break: keep-all;
+  overflow-wrap: break-word;
+}
+p { margin: 0 0 6pt; }
+b, strong { font-weight: 700; }
+code { font-family: 'SF Mono', Menlo, monospace; font-size: 0.86em; background: var(--panel); padding: 0 3px; border-radius: 3px; word-break: normal; overflow-wrap: anywhere; }
+a { color: var(--blue-d); text-decoration: none; }
+
+/* ---------- 제목 ---------- */
+h1 {
+  font-size: 15.5pt; font-weight: 700; letter-spacing: -0.2pt;
+  margin: 18pt 0 8pt; padding-bottom: 4pt; border-bottom: 1.2px solid var(--ink);
+  break-after: avoid; page-break-after: avoid;
+}
+h1 .no { color: var(--blue-d); margin-right: 6pt; }
+h2 { font-size: 11.4pt; font-weight: 700; margin: 13pt 0 4pt; break-after: avoid; page-break-after: avoid; }
+h3 { font-size: 10pt; font-weight: 700; margin: 9pt 0 3pt; color: var(--ink2); break-after: avoid; page-break-after: avoid; }
+.pb { break-before: page; page-break-before: always; }
+.nobreak { break-inside: avoid; page-break-inside: avoid; }
+
+/* ---------- 표지 ---------- */
+.kicker { font-size: 8.6pt; letter-spacing: 0.3pt; color: var(--muted); margin: 0 0 14pt; }
+.title { font-size: 30pt; font-weight: 800; letter-spacing: -0.8pt; line-height: 1.12; margin: 0 0 6pt; }
+.subtitle { font-size: 13pt; font-weight: 500; color: var(--ink2); line-height: 1.4; margin: 0 0 14pt; }
+table.meta { border-collapse: collapse; width: 100%; margin: 0 0 12pt; font-size: 9pt; }
+table.meta td { padding: 3.2pt 8pt 3.2pt 0; vertical-align: top; border-top: 1px solid var(--grid); line-height: 1.5; }
+table.meta td:first-child { width: 17%; color: var(--muted); }
+.lead { font-size: 10.6pt; line-height: 1.7; margin: 0 0 10pt; padding: 8pt 11pt; background: var(--panel); border-left: 3px solid var(--blue); }
+.cards { display: grid; grid-template-columns: repeat(4, 1fr); gap: 7pt; margin: 8pt 0 10pt; }
+.card { border: 1px solid var(--axis); border-radius: 6px; padding: 8pt 9pt 7pt; break-inside: avoid; }
+.card .big { font-size: 17pt; font-weight: 800; letter-spacing: -0.5pt; line-height: 1.15; }
+.card .big .sm { font-size: 10.5pt; font-weight: 600; color: var(--ink2); letter-spacing: 0; }
+.card .lab { font-size: 8.3pt; color: var(--ink2); line-height: 1.42; margin-top: 3pt; }
+.card.hl { border-color: var(--orange); }
+
+/* ---------- 목차 ---------- */
+.toc { columns: 2; column-gap: 20pt; font-size: 9pt; margin: 4pt 0 0; }
+.toc div { display: flex; justify-content: space-between; gap: 6pt; padding: 1.4pt 0; border-bottom: 1px dotted var(--axis); break-inside: avoid; }
+.toc .pg { color: var(--muted); font-variant-numeric: tabular-nums; }
+
+/* ---------- 표 ---------- */
+table.t { border-collapse: collapse; width: 100%; margin: 4pt 0 8pt; font-size: 8.5pt; line-height: 1.46; }
+table.t th { background: var(--head); font-weight: 700; text-align: left; padding: 3.4pt 5pt; border-top: 1.2px solid var(--ink2); border-bottom: 1px solid var(--axis); vertical-align: bottom; }
+table.t td { padding: 3.2pt 5pt; border-bottom: 1px solid var(--grid); vertical-align: top; }
+table.t tr:last-child td { border-bottom: 1.2px solid var(--ink2); }
+table.t td.n, table.t th.n { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+table.t td.c, table.t th.c { text-align: center; }
+table.t tr.sub td { background: var(--panel); font-weight: 700; }
+table.t tr.hl td { background: #fff6ee; }
+table.t .k { color: var(--muted); }
+table.t.compact { font-size: 8pt; }
+table.t.compact td, table.t.compact th { padding: 2.4pt 4pt; }
+table.t tr { break-inside: avoid; }
+table.t.keep { break-inside: avoid; page-break-inside: avoid; }
+.j-ok { color: var(--good); font-weight: 700; white-space: nowrap; }
+.j-part { color: #9a5b00; font-weight: 700; white-space: nowrap; }
+.j-no { color: var(--bad); font-weight: 700; white-space: nowrap; }
+.dim { color: var(--muted); }
+
+/* ---------- 그림·상자 ---------- */
+figure { margin: 8pt 0 10pt; break-inside: avoid; page-break-inside: avoid; }
+figure img { display: block; max-width: 100%; margin: 0 auto; }
+figcaption { font-size: 8.5pt; color: var(--ink2); line-height: 1.5; margin-top: 4pt; }
+figcaption b { color: var(--ink); }
+.note { background: var(--panel); border-left: 3px solid var(--blue); padding: 6pt 10pt; margin: 7pt 0 9pt; font-size: 9pt; line-height: 1.6; break-inside: avoid; }
+.note.warn { border-left-color: var(--orange); }
+.note p:last-child { margin-bottom: 0; }
+ul, ol { margin: 2pt 0 7pt; padding-left: 15pt; }
+li { margin: 0 0 2.4pt; }
+.row2 { display: grid; grid-template-columns: 1.15fr 1fr; gap: 12pt; align-items: start; break-inside: avoid; }
+.tiles { display: grid; grid-template-columns: repeat(5, 1fr); gap: 5pt; }
+.tiles .tile { text-align: center; font-size: 8pt; line-height: 1.35; color: var(--ink2); }
+.tiles img { width: 100%; border: 1px solid var(--grid); display: block; margin-bottom: 2pt; }
+.tiles .tile b { color: var(--ink); font-size: 8.4pt; }
+.small { font-size: 8.5pt; color: var(--ink2); }
+.foot { font-size: 8.4pt; color: var(--muted); line-height: 1.5; }

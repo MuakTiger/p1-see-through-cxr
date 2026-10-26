@@ -1,0 +1,25 @@
+# 예방접종·기준 모델 test 평가 고정 해시 (2026-10-22 16:30, test를 열기 직전, 이 6개 모델의 test 점수를 보기 전). 모델 v-s44·b-s44의 해시는 평가 직전에 덧붙인다.
+a6a97c7c60000d558d3d05cb9669a9973faa156137de11e32117dc81965b9f5f  reports/equipment_v2/test_plan_vaccine.md
+d27b2bfa7ce0e1de2990bd97de10f59e1334e1bc3a93592aca8ce5613e3af4bf  reports/equipment_v2/vaccine_plan.md
+1db9d4b4e3a3f9c2723b9525ff849a56beba0896357405fd0107c933c4b6e07a  src/equipment_eval_direct.py
+07697becd7638bd4e41aec84fe73532b8b31094da80bd141cebf8cf8cd9dcc9b  src/shift_eval.py
+6eadd1728f8946984b0e2a2536c45bed1695e4b8cbf0faba8ef029d38b7eea05  training/equipment_direct.py
+e4d124ff7cffa443eb598bad056a66cb1d470d0137fae8f2ab41d4baf4a98952  training/shift_filters.py
+42b42903dc1a6e3cad0083c9abb25df011c5731ff9e2bbf16f611cbec3d8f5af  training/train.py
+acb3c7e800dad079fad1af0b9a5ce83fcd345c11b54034956fc4b5e3dc42c65c  training/train_aug.py
+346cf166ffb4df4d8850f245c7439cf1b03c98b78b383d0cd94c3b078d6f591f  training/preprocess.py
+205286f33fe23aacde35de43aa5170a318f64eeae44e05402dae01fc83df0268  manifests/split_manifest.csv
+ff22fbbb3e8fe1872fe9f6a85f1e6310824cb344dbdd232973abf0e89fc5586f  runs/results/v-s42-20261022-jlab/model/best_model.pt
+df97075aabd5c314e665609a5af3364a70c89e07d6fe51f44b55589c75c01865  runs/results/v-s42-20261022-jlab/model/metadata.json
+de563c67345d141cfc6ba73b670951431bed6eac827dee067d8dcb8300442aa7  runs/results/b-s42-20261022-jlab/model/best_model.pt
+b59210f75d8e336075d4530d299f784483ccba3a80b7c74911b0699833909fec  runs/results/b-s42-20261022-jlab/model/metadata.json
+adef66ba589b52b00a1a8b6ad7c1f7efa26467128de09ffa094cbccdac4aacf4  runs/results/v-s43-20261022-jlab/model/best_model.pt
+752253663d95dfdc398fd300b240b71be8a42b21b1e6e5488e45a96a43ef80b7  runs/results/v-s43-20261022-jlab/model/metadata.json
+f76225d4d59b82bf6085345c7b0582f078d8ccf15af52a857b87044a5bbb771e  runs/results/b-s43-20261022-jlab/model/best_model.pt
+d49b757589e1af2db64fa3231a1aeeea5f447bd8abfd39736a3e07ffee819784  runs/results/b-s43-20261022-jlab/model/metadata.json
+# 평가 직전 덧붙임 (2026-10-22 16:47, v-s44 test 점수를 보기 전)
+16a95234057fee2e4fe2b99caa3409e0958cc15b3ab652174b398e75e2327d89  runs/results/v-s44-20261022-jlab/model/best_model.pt
+9bd8e0e15d6c7549bb6bea5d935763edf4c349850b1edb32a03dcb8b6e81f16d  runs/results/v-s44-20261022-jlab/model/metadata.json
+# 평가 직전 덧붙임 (2026-10-22 17:10, b-s44 test 점수를 보기 전)
+df02178e8a8cfc7243b05a5ddb7be4b85c3ebb51f8e0143372d72d0393b1f91f  runs/results/b-s44-20261022-jlab/model/best_model.pt
+6d618cc09c5554676936d73d6fa0b9bcfaba7612f277e47ca41ab1163f833027  runs/results/b-s44-20261022-jlab/model/metadata.json

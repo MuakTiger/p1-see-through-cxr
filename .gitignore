@@ -1,0 +1,19 @@
+# 비밀 정보 (절대 커밋 금지)
+aws_config.json
+aws.txt
+*.pem
+.env
+
+# 환경, 큰 파일, 실행 결과
+.venv/
+__pycache__/
+*.pyc
+.DS_Store
+*.pt
+*.pth
+*.tar.gz
+runs/
+chest_xray/
+weights/
+deploy/out/
+docs/final_report/

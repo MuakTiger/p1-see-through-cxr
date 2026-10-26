@@ -1,0 +1,578 @@
+{
+  "run_label": "local",
+  "sagemaker_job_name": null,
+  "started_at_kst": "2026-10-19T17:18:42+09:00",
+  "finished_at_kst": "2026-10-19T17:20:41+09:00",
+  "elapsed_seconds": 118.9,
+  "device": "cpu (arm)",
+  "versions": {
+    "torch": "2.6.0",
+    "torchvision": "0.21.0",
+    "python": "3.11.16",
+    "numpy": "1.26.4"
+  },
+  "paths": {
+    "images": "cli:--images-dir",
+    "manifests": "cli:--manifests-dir",
+    "models": "cli:--models-dir",
+    "output": "cli:--output-dir"
+  },
+  "evaluation_plan": {
+    "sha256": "ba614c0a63711e11e47b7a5d3bfc38679c6b3532cc5b6642d38dc46eec0edd33",
+    "checked_by": "로컬 파일 직접 계산"
+  },
+  "split_manifest_sha256": "205286f33fe23aacde35de43aa5170a318f64eeae44e05402dae01fc83df0268",
+  "model_sha256": {
+    "A": "7c3a14d1d1c617f14d2fc58560a61fb7bf6363b6eeb187fd7ef220d98c1ef5be",
+    "B": "8beae34fab86b4dd750506e8e4233dedba52852fdd13bccded7fc3495366e68e",
+    "C": "701f2d57b3615db9ef53a6184c47f0dcb22b106863d79fb6122352c5522b83cd",
+    "D": "a8bb8a96275344988935af29aeade0167e49cb77a751cb1a483e737fcce47254",
+    "P1": "3b97439d9021663379d317f5297235ba677381690d5477f49dc72371936bd3c5",
+    "P2": "81f95e2455d26c175ebacad4e645a3c2c37a3a924b5f61e274c7fbe6e300d37a",
+    "P3": "e729b9208b166034710eae61a13944f994f6a285bb9b10ae9e847296eaa22983",
+    "P4": "93088cf8728197aca5f0ad4f8bf7cce75d9fe56025cade9f4d9226f9fdb4108b"
+  },
+  "models": {
+    "A": {
+      "experiment_id": "A",
+      "preprocess": "P0",
+      "selected_epoch": 10,
+      "best_val_macro_f1": 0.8057719347930857
+    },
+    "B": {
+      "experiment_id": "B",
+      "preprocess": "P0",
+      "selected_epoch": 21,
+      "best_val_macro_f1": 0.8184308367440747
+    },
+    "C": {
+      "experiment_id": "C",
+      "preprocess": "P0",
+      "selected_epoch": 30,
+      "best_val_macro_f1": 0.8212873519892212
+    },
+    "D": {
+      "experiment_id": "D",
+      "preprocess": "P0",
+      "selected_epoch": 26,
+      "best_val_macro_f1": 0.8340214027325356
+    },
+    "P1": {
+      "experiment_id": "P1",
+      "preprocess": "P1",
+      "selected_epoch": 10,
+      "best_val_macro_f1": 0.8215585963448494
+    },
+    "P2": {
+      "experiment_id": "P2",
+      "preprocess": "P2",
+      "selected_epoch": 19,
+      "best_val_macro_f1": 0.8307597347350423
+    },
+    "P3": {
+      "experiment_id": "P3",
+      "preprocess": "P3",
+      "selected_epoch": 16,
+      "best_val_macro_f1": 0.8178849568268117
+    },
+    "P4": {
+      "experiment_id": "P4",
+      "preprocess": "P4",
+      "selected_epoch": 26,
+      "best_val_macro_f1": 0.8287226001511715
+    }
+  },
+  "primary_model": "D",
+  "rules": {
+    "prediction": "argmax(softmax), 임계값 조정 없음",
+    "bootstrap": "patient_group 단위 2000회, seed 42, 95% 백분위",
+    "duplicates": "같은 sha256 묶음에서 relative_path 사전순 첫 파일만 남김",
+    "zero_division": "정밀도 분모 0 → F1 = 0"
+  },
+  "checks": {
+    "plan_sha256_matches": true,
+    "split_manifest_sha256_matches": true,
+    "primary_model_sha256_matches": true,
+    "excluded_matches_plan": true,
+    "excluded": [
+      "test/NORMAL/NORMAL2-IM-0096-0001.jpeg",
+      "test/NORMAL/NORMAL2-IM-0173-0001-0002.jpeg",
+      "test/NORMAL/NORMAL2-IM-0246-0001-0002.jpeg",
+      "test/PNEUMONIA/person128_bacteria_607.jpeg",
+      "test/PNEUMONIA/person134_bacteria_644.jpeg",
+      "test/PNEUMONIA/person1661_virus_2873.jpeg"
+    ],
+    "duplicate_pairs": [
+      {
+        "kept": "test/NORMAL/NORMAL2-IM-0095-0001.jpeg",
+        "excluded": [
+          "test/NORMAL/NORMAL2-IM-0096-0001.jpeg"
+        ]
+      },
+      {
+        "kept": "test/NORMAL/NORMAL2-IM-0173-0001-0001.jpeg",
+        "excluded": [
+          "test/NORMAL/NORMAL2-IM-0173-0001-0002.jpeg"
+        ]
+      },
+      {
+        "kept": "test/NORMAL/NORMAL2-IM-0246-0001-0001.jpeg",
+        "excluded": [
+          "test/NORMAL/NORMAL2-IM-0246-0001-0002.jpeg"
+        ]
+      },
+      {
+        "kept": "test/PNEUMONIA/person128_bacteria_606.jpeg",
+        "excluded": [
+          "test/PNEUMONIA/person128_bacteria_607.jpeg"
+        ]
+      },
+      {
+        "kept": "test/PNEUMONIA/person134_bacteria_643.jpeg",
+        "excluded": [
+          "test/PNEUMONIA/person134_bacteria_644.jpeg"
+        ]
+      },
+      {
+        "kept": "test/PNEUMONIA/person1661_virus_2872.jpeg",
+        "excluded": [
+          "test/PNEUMONIA/person1661_virus_2873.jpeg"
+        ]
+      }
+    ],
+    "counts_match_plan": true,
+    "opened_images_all_test": true,
+    "opened_image_count": 3120,
+    "unique_opened_images": 624
+  },
+  "image_counts": {
+    "618": {
+      "n_images": 618,
+      "by_class": [
+        231,
+        240,
+        147
+      ],
+      "patients_by_class": [
+        224,
+        77,
+        126
+      ],
+      "patients_total": 426
+    },
+    "624": {
+      "n_images": 624,
+      "by_class": [
+        234,
+        242,
+        148
+      ],
+      "patients_by_class": [
+        225,
+        77,
+        126
+      ],
+      "patients_total": 427
+    }
+  },
+  "primary_618": {
+    "macro_f1": 0.6924332496794432,
+    "macro_auroc": 0.9078488457584486,
+    "accuracy": 0.7168284789644013,
+    "precision": [
+      1.0,
+      0.7896551724137931,
+      0.49557522123893805
+    ],
+    "recall": [
+      0.44155844155844154,
+      0.9541666666666667,
+      0.7619047619047619
+    ],
+    "f1": [
+      0.6126126126126126,
+      0.8641509433962264,
+      0.6005361930294906
+    ],
+    "auroc": [
+      0.9374140071814491,
+      0.9674878747795415,
+      0.818644655314355
+    ],
+    "confusion": [
+      [
+        102,
+        26,
+        103
+      ],
+      [
+        0,
+        229,
+        11
+      ],
+      [
+        0,
+        35,
+        112
+      ]
+    ],
+    "n_images": [
+      231,
+      240,
+      147
+    ],
+    "n_patients": [
+      224,
+      77,
+      126
+    ],
+    "n_images_total": 618,
+    "n_patients_total": 426,
+    "zero_division_classes": [],
+    "warnings": [],
+    "ci": {
+      "macro_f1": [
+        0.6524109678601937,
+        0.7324519913641766
+      ],
+      "macro_auroc": [
+        0.886606103282636,
+        0.9259356658130369
+      ],
+      "recall_normal": [
+        0.37673152198940824,
+        0.5093502447708055
+      ],
+      "recall_bacterial": [
+        0.9275296442687747,
+        0.9769239631336405
+      ],
+      "recall_viral": [
+        0.6754767414026969,
+        0.8504025149841344
+      ]
+    },
+    "ci_nan_counts": {
+      "macro_f1": 0,
+      "macro_auroc": 0,
+      "recall_normal": 0,
+      "recall_bacterial": 0,
+      "recall_viral": 0
+    }
+  },
+  "primary_624": {
+    "macro_f1": 0.6900545850110786,
+    "macro_auroc": 0.9078023321101699,
+    "accuracy": 0.7147435897435898,
+    "precision": [
+      1.0,
+      0.78839590443686,
+      0.49344978165938863
+    ],
+    "recall": [
+      0.4358974358974359,
+      0.9545454545454546,
+      0.7635135135135135
+    ],
+    "f1": [
+      0.6071428571428571,
+      0.8635514018691589,
+      0.5994694960212201
+    ],
+    "auroc": [
+      0.9379903572211264,
+      0.9676290511012072,
+      0.8177875880081762
+    ],
+    "confusion": [
+      [
+        102,
+        27,
+        105
+      ],
+      [
+        0,
+        231,
+        11
+      ],
+      [
+        0,
+        35,
+        113
+      ]
+    ],
+    "n_images": [
+      234,
+      242,
+      148
+    ],
+    "n_patients": [
+      225,
+      77,
+      126
+    ],
+    "n_images_total": 624,
+    "n_patients_total": 427,
+    "zero_division_classes": [],
+    "warnings": [],
+    "ci": {
+      "macro_f1": [
+        0.6475149850168536,
+        0.7296867193565877
+      ],
+      "macro_auroc": [
+        0.8860104034302239,
+        0.927449854297144
+      ],
+      "recall_normal": [
+        0.37227272727272726,
+        0.5043478260869565
+      ],
+      "recall_bacterial": [
+        0.9267241379310345,
+        0.978021978021978
+      ],
+      "recall_viral": [
+        0.6733333333333333,
+        0.8513638638638638
+      ]
+    },
+    "ci_nan_counts": {
+      "macro_f1": 0,
+      "macro_auroc": 0,
+      "recall_normal": 0,
+      "recall_bacterial": 0,
+      "recall_viral": 0
+    }
+  },
+  "misclassified_counts_618": {
+    "정상→폐렴": 129,
+    "폐렴→정상": 0,
+    "세균성→바이러스성": 11,
+    "바이러스성→세균성": 35
+  },
+  "subgroup_overlap": {
+    "618/same_number_as_original_train": {
+      "n_images": 317,
+      "n_patients": 170,
+      "n_images_by_class": [
+        0,
+        192,
+        125
+      ],
+      "macro_f1": 0.5774569122586745,
+      "macro_f1_ci95": [
+        0.5419310738790126,
+        0.6053895379424528
+      ],
+      "recall": [
+        NaN,
+        0.9583333333333334,
+        0.752
+      ],
+      "pneumonia_only_n": 317,
+      "pneumonia_only_accuracy": 0.8769716088328076,
+      "pneumonia_only_accuracy_ci95": [
+        0.8245448526977822,
+        0.9169200920056889
+      ],
+      "warnings": [
+        "NORMAL: 예측된 적 없음(정밀도 분모 0, F1=0 처리)",
+        "NORMAL: 이 세트에 없음(recall 계산 불가)",
+        "NORMAL: 이 세트에 없어서 AUROC 계산 불가(NaN, Macro 평균에서 제외)"
+      ]
+    },
+    "618/rest": {
+      "n_images": 301,
+      "n_patients": 256,
+      "n_images_by_class": [
+        231,
+        48,
+        22
+      ],
+      "macro_f1": 0.5302984240505122,
+      "macro_f1_ci95": [
+        0.44950682309266365,
+        0.5917796390454849
+      ],
+      "recall": [
+        0.44155844155844154,
+        0.9375,
+        0.8181818181818182
+      ],
+      "pneumonia_only_n": 70,
+      "pneumonia_only_accuracy": 0.9,
+      "pneumonia_only_accuracy_ci95": [
+        0.8,
+        0.9710144927536232
+      ],
+      "warnings": []
+    },
+    "624/same_number_as_original_train": {
+      "n_images": 320,
+      "n_patients": 170,
+      "n_images_by_class": [
+        0,
+        194,
+        126
+      ],
+      "macro_f1": 0.5782679373984,
+      "macro_f1_ci95": [
+        0.5429246823541023,
+        0.6060695304500305
+      ],
+      "recall": [
+        NaN,
+        0.9587628865979382,
+        0.753968253968254
+      ],
+      "pneumonia_only_n": 320,
+      "pneumonia_only_accuracy": 0.878125,
+      "pneumonia_only_accuracy_ci95": [
+        0.8255804897486054,
+        0.9178988653134762
+      ],
+      "warnings": [
+        "NORMAL: 예측된 적 없음(정밀도 분모 0, F1=0 처리)",
+        "NORMAL: 이 세트에 없음(recall 계산 불가)",
+        "NORMAL: 이 세트에 없어서 AUROC 계산 불가(NaN, Macro 평균에서 제외)"
+      ]
+    },
+    "624/rest": {
+      "n_images": 304,
+      "n_patients": 257,
+      "n_images_by_class": [
+        234,
+        48,
+        22
+      ],
+      "macro_f1": 0.5253975173330011,
+      "macro_f1_ci95": [
+        0.4471424260659896,
+        0.5858090020517971
+      ],
+      "recall": [
+        0.4358974358974359,
+        0.9375,
+        0.8181818181818182
+      ],
+      "pneumonia_only_n": 70,
+      "pneumonia_only_accuracy": 0.9,
+      "pneumonia_only_accuracy_ci95": [
+        0.8,
+        0.9710144927536232
+      ],
+      "warnings": []
+    }
+  },
+  "all_models_618": {
+    "A": {
+      "macro_f1": 0.7482745846283881,
+      "macro_f1_ci95": [
+        0.7061227245565564,
+        0.7869792539322514
+      ],
+      "macro_auroc": 0.9329055350124981,
+      "val_macro_f1": 0.8057719347930857,
+      "val_rank": 8,
+      "test_rank": 2
+    },
+    "B": {
+      "macro_f1": 0.7186918297001249,
+      "macro_f1_ci95": [
+        0.6767205209949011,
+        0.7570132999167986
+      ],
+      "macro_auroc": 0.9309415631723922,
+      "val_macro_f1": 0.8184308367440747,
+      "val_rank": 6,
+      "test_rank": 4
+    },
+    "C": {
+      "macro_f1": 0.6900020530193006,
+      "macro_f1_ci95": [
+        0.6477734492996834,
+        0.7270943950680173
+      ],
+      "macro_auroc": 0.914549362122326,
+      "val_macro_f1": 0.8212873519892212,
+      "val_rank": 5,
+      "test_rank": 7
+    },
+    "D": {
+      "macro_f1": 0.6924332496794432,
+      "macro_f1_ci95": [
+        0.6524109678601937,
+        0.7324519913641766
+      ],
+      "macro_auroc": 0.9078488457584486,
+      "val_macro_f1": 0.8340214027325356,
+      "val_rank": 1,
+      "test_rank": 6
+    },
+    "P1": {
+      "macro_f1": 0.7002774360804299,
+      "macro_f1_ci95": [
+        0.6587307489710176,
+        0.738914839673977
+      ],
+      "macro_auroc": 0.9111416191403974,
+      "val_macro_f1": 0.8215585963448494,
+      "val_rank": 4,
+      "test_rank": 5
+    },
+    "P2": {
+      "macro_f1": 0.6838160436904145,
+      "macro_f1_ci95": [
+        0.6419226776618312,
+        0.7223913526508376
+      ],
+      "macro_auroc": 0.9173007511350096,
+      "val_macro_f1": 0.8307597347350423,
+      "val_rank": 2,
+      "test_rank": 8
+    },
+    "P3": {
+      "macro_f1": 0.7327813710224778,
+      "macro_f1_ci95": [
+        0.6922119188047661,
+        0.7702459382806224
+      ],
+      "macro_auroc": 0.9132726037817772,
+      "val_macro_f1": 0.8178849568268117,
+      "val_rank": 7,
+      "test_rank": 3
+    },
+    "P4": {
+      "macro_f1": 0.7569620181897733,
+      "macro_f1_ci95": [
+        0.7158895016031191,
+        0.7933089572039578
+      ],
+      "macro_auroc": 0.9248575924755071,
+      "val_macro_f1": 0.8287226001511715,
+      "val_rank": 3,
+      "test_rank": 1
+    }
+  },
+  "sklearn_crosscheck_primary_618": {
+    "available": true,
+    "sklearn_version": "1.7.2",
+    "max_abs_diff": {
+      "macro_f1": 0.0,
+      "precision": 0.0,
+      "recall": 0.0,
+      "auroc": 0.0
+    },
+    "all_match_1e-9": true
+  },
+  "outputs": [
+    "test_predictions.csv",
+    "metrics.csv",
+    "confusion_matrix.csv",
+    "misclassified.csv",
+    "subgroup_overlap.csv",
+    "all_models_test.csv",
+    "evaluation_summary.json"
+  ]
+}

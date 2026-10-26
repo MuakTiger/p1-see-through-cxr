@@ -1,0 +1,79 @@
+{
+  "config": {
+    "experiment_id": "b-s43",
+    "preprocess": "P0",
+    "preprocess_desc": "P0 원본(전처리 없음)",
+    "preprocess_params": {},
+    "preprocess_order": "RGB 변환(회색은 3채널 복제) → Resize((512,512)) → ToTensor → Normalize(ImageNet mean/std)",
+    "model": "resnet18",
+    "train_mode": "layer4",
+    "trainable": "layer4 + fc (실험 B: layer4 미세조정)",
+    "trainable_params": 8395267,
+    "optimizer": "Adam (파라미터 그룹 2개: fc=lr, layer4=lr_finetune)",
+    "loss": "CrossEntropyLoss (클래스 가중치 없음)",
+    "class_weight": "none",
+    "class_weight_values": null,
+    "class_weight_counts": null,
+    "class_weight_note": null,
+    "epochs": 30,
+    "batch_size": 16,
+    "lr": 0.001,
+    "lr_finetune": 0.0001,
+    "seed": 43,
+    "num_workers": 4,
+    "augmentation": "없음 (좌우 반전 금지)",
+    "augment": "none",
+    "noise_std_max": null,
+    "noise_prob": null,
+    "equip_prob": null,
+    "equip_kinds": null,
+    "equip_max": null,
+    "max_train_samples": null,
+    "max_val_samples": null,
+    "path_sources": {
+      "images": "cli:--images-dir",
+      "manifests": "cli:--manifests-dir",
+      "weights": "cli:--weights-dir",
+      "model_dir": "cli:--model-dir",
+      "output_dir": "cli:--output-dir"
+    }
+  },
+  "seed": 43,
+  "train_mode": "layer4",
+  "lr_finetune": 0.0001,
+  "trainable_params": 8395267,
+  "augment": "none",
+  "noise_std_max": null,
+  "noise_prob": null,
+  "class_weight": "none",
+  "class_weight_values": null,
+  "class_weight_counts": null,
+  "class_weight_note": null,
+  "device": {
+    "type": "cuda",
+    "name": "Tesla T4"
+  },
+  "versions": {
+    "torch": "2.8.0",
+    "torchvision": "0.24.0",
+    "python": "3.12.15"
+  },
+  "selected_epoch": 1,
+  "best_val_macro_f1": 0.8311930396947655,
+  "split_manifest_sha256": "205286f33fe23aacde35de43aa5170a318f64eeae44e05402dae01fc83df0268",
+  "resnet18_imagenet_pt_sha256": "d7f08da5a79d45811dd89e4cb2e2d96039ec41bd931ca61a71296966ceb77fff",
+  "num_train_images": 4186,
+  "num_val_images": 1030,
+  "train_class_counts": {
+    "NORMAL": 1075,
+    "BACTERIAL_PNEUMONIA": 2042,
+    "VIRAL_PNEUMONIA": 1069
+  },
+  "val_class_counts": {
+    "NORMAL": 266,
+    "BACTERIAL_PNEUMONIA": 488,
+    "VIRAL_PNEUMONIA": 276
+  },
+  "total_training_seconds": 1575.4,
+  "status": "Completed"
+}

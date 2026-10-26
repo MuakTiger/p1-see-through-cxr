@@ -1,0 +1,24 @@
+# 폐+예방접종(lv) test 평가 고정 해시 (2026-10-22 19:16, lv 와 l 의 점수를 보기 전). 모델 해시는 평가 직전에 덧붙인다.
+047c74f1e6a0f305a10f9d3bbae46273356a46d9e7e8180c5667542190a0bca9  reports/equipment_v2/test_plan_lung_vaccine.md
+f41fa2f499e14220c0f61eb371beea177e5039921141c16b12f8e3c561417fd7  reports/equipment_v2/lung_vaccine_plan.md
+5a954f7ae81502fbba7fdf0e163892f24c5975859adf572b5cb879e99367a166  reports/equipment_v2/test_plan_lung.md
+8a393d7f3c0d55cc5721aee9bd87d6661116f7a348eb59111619fe43d9df3e13  src/equipment_eval_lung.py
+1db9d4b4e3a3f9c2723b9525ff849a56beba0896357405fd0107c933c4b6e07a  src/equipment_eval_direct.py
+07697becd7638bd4e41aec84fe73532b8b31094da80bd141cebf8cf8cd9dcc9b  src/shift_eval.py
+231e8cb0038b4365d264ed887155cbd59d11d618cc8dd01dd74b37a9b21b9398  training/lung_prep.py
+b1fccee00880014fee3e3d418b91a34eb6c9dcc4a3767104fd330e0b97af4283  training/train_lung.py
+6eadd1728f8946984b0e2a2536c45bed1695e4b8cbf0faba8ef029d38b7eea05  training/equipment_direct.py
+e4d124ff7cffa443eb598bad056a66cb1d470d0137fae8f2ab41d4baf4a98952  training/shift_filters.py
+42b42903dc1a6e3cad0083c9abb25df011c5731ff9e2bbf16f611cbec3d8f5af  training/train.py
+205286f33fe23aacde35de43aa5170a318f64eeae44e05402dae01fc83df0268  manifests/split_manifest.csv
+d90667d3e517552bc9984a4f7d4b4fe9c29685c0bb3cc9402a223ae3821abbc7  runs/lung_masks/lung_hull_masks.npz
+7879874e05b0cb6b386541dc24b1ed25ca1dbb054bf642dc58fae5049dc6a48b  runs/lung_masks/val_lung_masks.npz
+# 평가 직전 덧붙임 (2026-10-22 19:34, lv-s42 의 test 점수를 보기 전)
+2792cb434fffcb50a7d9ee96534c2db0b14599be90b718efa5a4e7c417e241d9  runs/results/lv-s42-20261022-191511/model/best_model.pt
+704b99d0ea23c2c3c6a8e3fbd39acf8edf11262b6b1099c977bba7dd6b9571a5  runs/results/lv-s42-20261022-191511/model/metadata.json
+# 평가 직전 덧붙임 (2026-10-22 20:45, lv-s43 의 test 점수를 보기 전)
+cdcdcca5822a10b85e52f205978297100c42db081962fd777a870509cc82bb3e  runs/results/lv-s43-20261022-191513/model/best_model.pt
+17909e1365302d27b65ed8216a49c320e89e666612a34500a5255dbc9907ce1f  runs/results/lv-s43-20261022-191513/model/metadata.json
+# 평가 직전 덧붙임 (2026-10-22 20:55, lv-s44 의 test 점수를 보기 전)
+322b99b23c6e81f60a41b0ea605b52c2298db8b12706b2ea6bf53546df00e10d  runs/results/lv-s44-20261022-191515/model/best_model.pt
+39f2af574f09dceae0f2967832ca13da1b9cb7ed457d3c789f2dd42f8ff4db9d  runs/results/lv-s44-20261022-191515/model/metadata.json

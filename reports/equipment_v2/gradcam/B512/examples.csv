@@ -1,0 +1,13 @@
+image,true,pred,correct,p_normal,p_bacterial,p_viral
+train/NORMAL/IM-0293-0001.jpeg,정상,정상,True,1.0000,0.0000,0.0000
+train/NORMAL/NORMAL2-IM-0481-0001.jpeg,정상,정상,True,1.0000,0.0000,0.0000
+train/NORMAL/NORMAL2-IM-0793-0001.jpeg,정상,세균성,False,0.4958,0.5042,0.0000
+train/NORMAL/IM-0189-0001.jpeg,정상,바이러스성,False,0.3625,0.0000,0.6375
+train/PNEUMONIA/person608_bacteria_2471.jpeg,세균성,세균성,True,0.0000,0.9998,0.0002
+train/PNEUMONIA/person669_bacteria_2561.jpeg,세균성,세균성,True,0.0000,1.0000,0.0000
+train/PNEUMONIA/person1179_bacteria_3127.jpeg,세균성,바이러스성,False,0.0000,0.2976,0.7024
+train/PNEUMONIA/person1869_bacteria_4745.jpeg,세균성,바이러스성,False,0.0000,0.0194,0.9806
+train/PNEUMONIA/person1019_virus_1707.jpeg,바이러스성,바이러스성,True,0.0000,0.0016,0.9984
+train/PNEUMONIA/person321_virus_648.jpeg,바이러스성,바이러스성,True,0.0000,0.1034,0.8966
+train/PNEUMONIA/person732_virus_1353.jpeg,바이러스성,세균성,False,0.0001,0.9991,0.0008
+train/PNEUMONIA/person1328_virus_2294.jpeg,바이러스성,세균성,False,0.0031,0.9969,0.0001

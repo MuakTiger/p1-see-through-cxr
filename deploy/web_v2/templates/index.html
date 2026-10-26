@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>장비 설정 필터 체험 · 흉부 X선 3분류 B512</title>
+<style>
+  :root { --bg:#0c0c0e; --panel:#151518; --line:#2c2c32; --text:#f2f2f3; --muted:#b4b4bc; --accent:#ff7a2f; --good:#6fd08c; --bad:#ff6b6b; --bar:#3b3b44; }
+  * { box-sizing: border-box; }
+  body { margin:0; background:var(--bg); color:var(--text); font:16px/1.55 "Noto Sans KR","Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif; }
+  header { padding:20px 28px 8px; border-bottom:1px solid var(--line); }
+  h1 { margin:0 0 4px; font-size:24px; }
+  header p { margin:0 0 12px; color:var(--muted); max-width:980px; }
+  .layout { display:grid; grid-template-columns:380px 1fr; gap:20px; padding:20px 28px 28px; align-items:start; }
+  @media (max-width: 1000px) { .layout { grid-template-columns:1fr; } }
+  fieldset { border:1px solid var(--line); border-radius:8px; background:var(--panel); margin:0 0 14px; padding:12px 14px 14px; }
+  legend { padding:0 6px; font-weight:700; color:var(--accent); }
+  .opt { display:flex; align-items:flex-start; gap:8px; padding:6px 4px; border-radius:6px; cursor:pointer; }
+  .opt:hover { background:#1d1d22; }
+  .opt input { margin-top:5px; accent-color:var(--accent); }
+  .opt small { display:block; color:var(--muted); }
+  .grp { margin:6px 0 2px; color:var(--muted); font-size:14px; }
+  .tag { display:inline-block; font-size:12px; padding:0 6px; border:1px solid var(--line); border-radius:10px; color:var(--muted); margin-left:6px; }
+  .tag.t { border-color:var(--accent); color:var(--accent); }
+  .seg { display:flex; gap:6px; }
+  .seg label { flex:1; text-align:center; border:1px solid var(--line); border-radius:6px; padding:8px 0; cursor:pointer; background:#1b1b20; }
+  .seg input { position:absolute; opacity:0; pointer-events:none; }
+  .seg input:checked + span { color:var(--accent); font-weight:700; }
+  .seg label:has(input:checked) { border-color:var(--accent); }
+  .seg label:has(input:focus-visible), .opt:has(input:focus-visible) { outline:2px solid var(--accent); outline-offset:2px; }
+  #strengthValue { margin:8px 2px 0; color:var(--muted); min-height:24px; }
+  button { background:var(--accent); color:#111; border:0; border-radius:6px; padding:10px 18px; font:inherit; font-weight:700; cursor:pointer; }
+  button:focus-visible { outline:2px solid #fff; outline-offset:2px; }
+  #status { margin:8px 2px 0; color:var(--muted); min-height:24px; }
+  #status.err { color:var(--bad); }
+  .pair { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+  @media (max-width: 700px) { .pair { grid-template-columns:1fr; } }
+  figure { margin:0; background:var(--panel); border:1px solid var(--line); border-radius:8px; padding:12px; }
+  figure img { width:100%; aspect-ratio:1/1; background:#000; border-radius:4px; display:block; }
+  figcaption { margin:8px 0 6px; font-weight:700; }
+  .bars { display:grid; gap:6px; }
+  .bar { display:grid; grid-template-columns:96px 1fr 62px; gap:8px; align-items:center; font-size:14px; }
+  .bar .track { height:14px; background:#26262c; border-radius:7px; overflow:hidden; }
+  .bar .fill { height:100%; background:var(--bar); }
+  .bar.top .fill { background:var(--accent); }
+  .bar.top { font-weight:700; }
+  .bar .pct { text-align:right; font-variant-numeric:tabular-nums; }
+  #verdict { margin:14px 0; padding:12px 14px; border:1px solid var(--line); border-left:4px solid var(--accent); border-radius:6px; background:var(--panel); }
+  #verdict.changed { border-left-color:var(--bad); }
+  #verdict.same { border-left-color:var(--good); }
+  .card { background:var(--panel); border:1px solid var(--line); border-radius:8px; padding:12px 16px; margin:0 0 12px; }
+  .card h2 { margin:0 0 4px; font-size:16px; color:var(--accent); }
+  .card p { margin:4px 0; }
+  table { width:100%; border-collapse:collapse; font-size:14px; font-variant-numeric:tabular-nums; }
+  th, td { border-bottom:1px solid var(--line); padding:6px 6px; text-align:left; }
+  th { color:var(--muted); font-weight:500; }
+  .neg { color:var(--bad); }
+  .note { color:var(--muted); font-size:14px; }
+  footer { padding:0 28px 28px; color:var(--muted); font-size:13px; max-width:1100px; }
+  .hidden { display:none; }
+  #upload { margin:6px 0 0 26px; }
+</style>
+</head>
+<body>
+<header>
+  <h1>장비 설정 필터 체험</h1>
+  <p>같은 흉부 X선 한 장을 기준 모델 B512에 두 번 넣습니다. 한 번은 원본 그대로, 한 번은 장비 설정 필터를 건 사진입니다. 확률이 얼마나 달라지는지 비교해 보세요.</p>
+</header>
+<main class="layout">
+  <section aria-label="설정">
+    <fieldset id="fsSample"><legend>1 · 사진</legend><div id="samples"></div></fieldset>
+    <fieldset id="fsFilter"><legend>2 · 필터</legend><div id="filters"></div></fieldset>
+    <fieldset id="fsLevel"><legend>3 · 강도</legend>
+      <div class="seg" id="levels"></div>
+      <p id="strengthValue"></p>
+    </fieldset>
+    <button type="button" id="run">예측 실행</button>
+    <p id="status" role="status" aria-live="polite"></p>
+  </section>
+  <section aria-label="결과" aria-live="polite">
+    <div class="pair">
+      <figure><img id="imgO" alt="원본 사진 (512×512 회색조)"><figcaption id="capO">원본</figcaption><div class="bars" id="barsO"></div></figure>
+      <figure><img id="imgF" alt="필터를 건 사진 (512×512 회색조)"><figcaption id="capF">필터 적용</figcaption><div class="bars" id="barsF"></div></figure>
+    </div>
+    <div id="verdict">사진, 필터, 강도를 고르면 결과가 여기에 나타납니다.</div>
+    <div class="card"><h2>장비에서 일어나는 일</h2><p id="happens"></p></div>
+    <div class="card"><h2>이 사진에는 어떻게 구현했나</h2><p id="how"></p><p class="note" id="caution"></p></div>
+    <div class="card"><h2>이 필터를 걸었을 때 모델 점수 변화 (전체 사진 평균)</h2>
+      <div id="effectBox"></div>
+      <p class="note">기준 모델 B512 한 개(seed 42)의 결과입니다. 사진 한 장의 결과는 평균과 다를 수 있습니다. 다시 학습하면 하락 크기는 달라졌지만, 약한 곳의 순서는 비슷했습니다. 필터끼리 강도가 보정되어 있지 않아서 필터 사이의 점수 하락을 직접 비교하지는 마세요.</p>
+    </div>
+  </section>
+</main>
+<footer>
+  교육용 시연이며 임상 진단이 아닙니다. 필터는 실제 장비의 효과를 영상처리로 흉내 낸 것이고, 후처리(경계 강조·대비 보정)는 제조사 알고리즘이 아니라 대표 기법입니다.
+  예시 사진은 val 사진 중 B512가 원본에서 높은 확신(90% 이상)으로 맞힌 것을 무작위로 골랐습니다. 점수의 기준은 val 1,030장과 test 618장(같은 사진 사본 6장 제외)입니다.
+</footer>
+<script>
+(function () {
+  const CLASSES = ["정상", "세균성 폐렴", "바이러스성 폐렴"];
+  const LEVEL_NAMES = ["원본", "약", "중", "강"];
+  const $ = (id) => document.getElementById(id);
+  let CAT = null, ctl = null, timer = null;
+  const state = { sample: "normal", filter: "kvp", level: 3 };
+
+  function el(tag, props, children) {
+    const e = document.createElement(tag);
+    Object.entries(props || {}).forEach(([k, v]) => { if (k === "text") e.textContent = v; else if (k === "class") e.className = v; else e.setAttribute(k, v); });
+    (children || []).forEach((c) => e.appendChild(c));
+    return e;
+  }
+  function radio(name, value, checked, labelText, small, extra) {
+    const input = el("input", { type: "radio", name, value });
+    input.checked = checked;
+    const body = el("span", {}, [document.createTextNode(labelText)]);
+    if (extra) body.appendChild(extra);
+    if (small) body.appendChild(el("small", { text: small }));
+    return { input, label: el("label", { class: "opt" }, [input, body]) };
+  }
+
+  function buildControls() {
+    const sBox = $("samples");
+    Object.entries(CAT.samples).forEach(([id, s]) => {
+      const r = radio("sample", id, id === state.sample, s.label, "정답: " + s.truth);
+      r.input.addEventListener("change", () => { state.sample = id; $("upload").classList.add("hidden"); schedule(); });
+      sBox.appendChild(r.label);
+    });
+    const up = radio("sample", "upload", false, "내 사진 올리기", "JPEG/PNG, 2 MiB 이하");
+    up.input.addEventListener("change", () => { state.sample = "upload"; $("upload").classList.remove("hidden"); schedule(); });
+    sBox.appendChild(up.label);
+    const file = el("input", { type: "file", id: "upload", accept: "image/jpeg,image/png", "aria-label": "분석할 사진 선택" });
+    file.classList.add("hidden");
+    file.addEventListener("change", schedule);
+    sBox.appendChild(file);
+
+    const fBox = $("filters");
+    [["device", "기기·촬영 조건 5종"], ["post", "제조사 후처리·전송 3종"]].forEach(([g, title]) => {
+      fBox.appendChild(el("div", { class: "grp", text: title }));
+      CAT.filters.filter((f) => f.group === g).forEach((f) => {
+        const tag = el("span", { class: "tag" + (f.trained ? " t" : ""), text: f.trained ? "증강에 사용" : "증강에서 제외" });
+        const r = radio("filter", f.id, f.id === state.filter, f.title, null, tag);
+        r.input.addEventListener("change", () => { state.filter = f.id; schedule(); });
+        fBox.appendChild(r.label);
+      });
+    });
+
+    const lBox = $("levels");
+    LEVEL_NAMES.forEach((n, i) => {
+      const input = el("input", { type: "radio", name: "level", value: String(i) });
+      input.checked = i === state.level;
+      input.addEventListener("change", () => { state.level = i; schedule(); });
+      lBox.appendChild(el("label", {}, [input, el("span", { text: n })]));
+    });
+  }
+
+  function schedule() { clearTimeout(timer); timer = setTimeout(run, 200); updateText(); }
+
+  function filterInfo() { return CAT.filters.find((f) => f.id === state.filter); }
+
+  function updateText() {
+    const f = filterInfo();
+    $("happens").textContent = f.happens;
+    $("how").textContent = f.how;
+    $("caution").textContent = f.caution + (f.trained ? " 이 필터는 '장비 효과 증강' 학습에 섞은 5종 중 하나입니다." : "");
+    $("strengthValue").textContent = state.level === 0 ? "필터를 걸지 않은 원본입니다." : "강도 값: " + f.levels[state.level - 1];
+    renderEffects();
+  }
+
+  function fmt(x) { return x.toFixed(3); }
+  function signed(x) { return (x > 0 ? "+" : x < 0 ? "−" : "") + Math.abs(x).toFixed(3); }
+
+  function renderEffects() {
+    const box = $("effectBox");
+    box.textContent = "";
+    if (state.level === 0) {
+      box.appendChild(el("p", { text: "필터를 걸지 않은 원본 점수입니다. val Macro-F1 " + fmt(CAT.effects.val.rows.clean["0"].macro_f1) + ", test Macro-F1 " + fmt(CAT.effects.test.rows.clean["0"].macro_f1) + ". 필터를 고르고 강도를 약·중·강으로 바꾸면 변화가 표시됩니다." }));
+      return;
+    }
+    const table = el("table", {});
+    const head = el("tr", {});
+    ["데이터", "Macro-F1 (원본 → 필터)", "변화 [95% 구간]", "정상 recall", "세균성 recall", "바이러스성 recall"].forEach((h) => head.appendChild(el("th", { scope: "col", text: h })));
+    table.appendChild(el("thead", {}, [head]));
+    const body = el("tbody", {});
+    [["val", "val 1,030장"], ["test", "test 618장"]].forEach(([k, label]) => {
+      const rows = CAT.effects[k].rows, base = rows.clean["0"], r = rows[state.filter][String(state.level)];
+      const tr = el("tr", {});
+      tr.appendChild(el("td", { text: label }));
+      tr.appendChild(el("td", { text: fmt(base.macro_f1) + " → " + fmt(r.macro_f1) }));
+      const ci = signed(r.delta_f1) + " [" + signed(r.ci[0]) + ", " + signed(r.ci[1]) + "]" + (r.significant ? "" : " (구간이 0 포함)");
+      tr.appendChild(el("td", { class: r.delta_f1 < 0 ? "neg" : "", text: ci }));
+      [0, 1, 2].forEach((i) => tr.appendChild(el("td", { text: base.recall[i].toFixed(2) + " → " + r.recall[i].toFixed(2) })));
+      body.appendChild(tr);
+    });
+    table.appendChild(body);
+    box.appendChild(table);
+  }
+
+  function renderBars(container, res, other) {
+    container.textContent = "";
+    const top = res.probs.indexOf(Math.max(...res.probs));
+    res.probs.forEach((p, i) => {
+      const fill = el("div", { class: "fill" });
+      fill.style.width = (p * 100).toFixed(1) + "%";
+      const row = el("div", { class: "bar" + (i === top ? " top" : ""), role: "img", "aria-label": CLASSES[i] + " " + (p * 100).toFixed(1) + "퍼센트" }, [
+        el("span", { text: CLASSES[i] }), el("div", { class: "track" }, [fill]), el("span", { class: "pct", text: (p * 100).toFixed(1) + "%" })]);
+      container.appendChild(row);
+    });
+  }
+
+  function setStatus(msg, isErr) { const s = $("status"); s.textContent = msg; s.className = isErr ? "err" : ""; }
+
+  function renderResult(d) {
+    $("imgO").src = d.original.image;
+    $("imgF").src = d.filtered.image;
+    const f = filterInfo();
+    $("capO").textContent = "원본 → 예측: " + d.original.pred_ko;
+    $("capF").textContent = (d.level === 0 ? "원본 (필터 없음)" : f.title + " · " + LEVEL_NAMES[d.level]) + " → 예측: " + d.filtered.pred_ko;
+    renderBars($("barsO"), d.original);
+    renderBars($("barsF"), d.filtered);
+    const v = $("verdict");
+    const changed = d.original.pred !== d.filtered.pred;
+    const truth = d.source.truth ? " (정답: " + d.source.truth + ")" : "";
+    const dn = ((d.filtered.probs[0] - d.original.probs[0]) * 100);
+    v.className = d.level === 0 ? "" : (changed ? "changed" : "same");
+    v.textContent = d.level === 0
+      ? "필터를 걸지 않은 원본입니다. 예측: " + d.original.pred_ko + truth + "."
+      : (changed ? "예측이 바뀌었습니다: " + d.original.pred_ko + " → " + d.filtered.pred_ko + truth + ". " : "예측은 그대로입니다: " + d.original.pred_ko + truth + ". ")
+        + "정상 확률 " + (d.original.probs[0] * 100).toFixed(1) + "% → " + (d.filtered.probs[0] * 100).toFixed(1) + "% (" + (dn >= 0 ? "+" : "−") + Math.abs(dn).toFixed(1) + "%p). "
+        + "사진 한 장의 결과입니다.";
+    setStatus("완료 (" + d.elapsed_ms + " ms)");
+  }
+
+  async function run() {
+    const fd = new FormData();
+    fd.append("filter", state.filter);
+    fd.append("level", String(state.level));
+    if (state.sample === "upload") {
+      const f = $("upload").files[0];
+      if (!f) { setStatus("올릴 사진을 선택하세요."); return; }
+      fd.append("image", f);
+    } else { fd.append("sample", state.sample); }
+    if (ctl) ctl.abort();
+    ctl = new AbortController();
+    setStatus("계산 중... (Lambda → Endpoint)");
+    try {
+      const resp = await fetch("/api/run", { method: "POST", body: fd, signal: ctl.signal });
+      const d = await resp.json();
+      if (!resp.ok || !d.ok) { setStatus(d.error || "오류가 발생했습니다.", true); return; }
+      renderResult(d);
+    } catch (e) {
+      if (e.name !== "AbortError") setStatus("서버에 연결하지 못했습니다.", true);
+    }
+  }
+
+  fetch("/api/catalog").then((r) => r.json()).then((c) => {
+    CAT = c; buildControls(); updateText(); run();
+  }).catch(() => setStatus("카탈로그를 불러오지 못했습니다.", true));
+  $("run").addEventListener("click", () => { clearTimeout(timer); run(); });
+})();
+</script>
+</body>
+</html>

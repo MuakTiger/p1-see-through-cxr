@@ -1,0 +1,9 @@
+# 폐+예방접종(lv) 계획 고정 해시 (2026-10-22 19:15, lv 학습 제출 직전)
+f41fa2f499e14220c0f61eb371beea177e5039921141c16b12f8e3c561417fd7  reports/equipment_v2/lung_vaccine_plan.md
+b1fccee00880014fee3e3d418b91a34eb6c9dcc4a3767104fd330e0b97af4283  training/train_lung.py
+231e8cb0038b4365d264ed887155cbd59d11d618cc8dd01dd74b37a9b21b9398  training/lung_prep.py
+6eadd1728f8946984b0e2a2536c45bed1695e4b8cbf0faba8ef029d38b7eea05  training/equipment_direct.py
+e4d124ff7cffa443eb598bad056a66cb1d470d0137fae8f2ab41d4baf4a98952  training/shift_filters.py
+b3bd526657cde8b028a9658454cbcb743a81cec9f07f83597d4a60f6fba5f52a  src/make_hull_masks.py
+d90667d3e517552bc9984a4f7d4b4fe9c29685c0bb3cc9402a223ae3821abbc7  runs/lung_masks/lung_hull_masks.npz
+4ab4e16ae92f9e69ad19d6a37b6ece63dc3ee0f5a21da84cef1fde65c6714c97  submit_training.py

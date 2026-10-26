@@ -1,0 +1,2 @@
+6eadd1728f8946984b0e2a2536c45bed1695e4b8cbf0faba8ef029d38b7eea05  training/equipment_direct.py
+e4d124ff7cffa443eb598bad056a66cb1d470d0137fae8f2ab41d4baf4a98952  training/shift_filters.py

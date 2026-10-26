@@ -1,0 +1,65 @@
+{
+  "config": {
+    "experiment_id": "D",
+    "preprocess": "P0",
+    "model": "resnet18",
+    "train_mode": "layer4",
+    "trainable": "layer4 + fc (실험 B: layer4 미세조정)",
+    "trainable_params": 8395267,
+    "optimizer": "Adam (파라미터 그룹 2개: fc=lr, layer4=lr_finetune)",
+    "loss": "CrossEntropyLoss (클래스 가중치 없음)",
+    "epochs": 30,
+    "batch_size": 16,
+    "lr": 0.001,
+    "lr_finetune": 0.0001,
+    "seed": 42,
+    "num_workers": 4,
+    "augmentation": "회색 가우시안 노이즈 noise (p=0.5, std 0~10), 학습에만 (좌우 반전 금지)",
+    "augment": "noise",
+    "noise_std_max": 10.0,
+    "noise_prob": 0.5,
+    "max_train_samples": null,
+    "max_val_samples": null,
+    "path_sources": {
+      "images": "env:SM_CHANNEL_IMAGES",
+      "manifests": "env:SM_CHANNEL_MANIFESTS",
+      "weights": "env:SM_CHANNEL_WEIGHTS",
+      "model_dir": "env:SM_MODEL_DIR",
+      "output_dir": "env:SM_OUTPUT_DATA_DIR"
+    }
+  },
+  "seed": 42,
+  "train_mode": "layer4",
+  "lr_finetune": 0.0001,
+  "trainable_params": 8395267,
+  "augment": "noise",
+  "noise_std_max": 10.0,
+  "noise_prob": 0.5,
+  "device": {
+    "type": "cuda",
+    "name": "Tesla T4"
+  },
+  "versions": {
+    "torch": "2.2.0",
+    "torchvision": "0.17.0",
+    "python": "3.10.13"
+  },
+  "selected_epoch": 26,
+  "best_val_macro_f1": 0.8340214027325356,
+  "split_manifest_sha256": "205286f33fe23aacde35de43aa5170a318f64eeae44e05402dae01fc83df0268",
+  "resnet18_imagenet_pt_sha256": "d7f08da5a79d45811dd89e4cb2e2d96039ec41bd931ca61a71296966ceb77fff",
+  "num_train_images": 4186,
+  "num_val_images": 1030,
+  "train_class_counts": {
+    "NORMAL": 1075,
+    "BACTERIAL_PNEUMONIA": 2042,
+    "VIRAL_PNEUMONIA": 1069
+  },
+  "val_class_counts": {
+    "NORMAL": 266,
+    "BACTERIAL_PNEUMONIA": 488,
+    "VIRAL_PNEUMONIA": 276
+  },
+  "total_training_seconds": 1088.4,
+  "status": "Completed"
+}

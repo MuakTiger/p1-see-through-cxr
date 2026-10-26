@@ -1,0 +1,5 @@
+model_id,eval_set,subgroup,n_images,n_patients,n_normal,n_bacterial,n_viral,macro_f1,macro_f1_ci_low,macro_f1_ci_high,macro_auroc,accuracy,recall_normal,recall_bacterial,recall_viral,pneumonia_only_n,pneumonia_only_accuracy,pneumonia_only_accuracy_ci_low,pneumonia_only_accuracy_ci_high,warnings
+D,618,same_number_as_original_train,317,170,0,192,125,0.577457,0.541931,0.605390,0.943760,0.876972,,0.958333,0.752000,317,0.876972,0.824545,0.916920,"NORMAL: 예측된 적 없음(정밀도 분모 0, F1=0 처리) | NORMAL: 이 세트에 없음(recall 계산 불가) | NORMAL: 이 세트에 없어서 AUROC 계산 불가(NaN, Macro 평균에서 제외)"
+D,618,rest,301,256,231,48,22,0.530298,0.449507,0.591780,0.892603,0.548173,0.441558,0.937500,0.818182,70,0.900000,0.800000,0.971014,
+D,624,same_number_as_original_train,320,170,0,194,126,0.578268,0.542925,0.606070,0.944373,0.878125,,0.958763,0.753968,320,0.878125,0.825580,0.917899,"NORMAL: 예측된 적 없음(정밀도 분모 0, F1=0 처리) | NORMAL: 이 세트에 없음(recall 계산 불가) | NORMAL: 이 세트에 없어서 AUROC 계산 불가(NaN, Macro 평균에서 제외)"
+D,624,rest,304,257,234,48,22,0.525398,0.447142,0.585809,0.892453,0.542763,0.435897,0.937500,0.818182,70,0.900000,0.800000,0.971014,
